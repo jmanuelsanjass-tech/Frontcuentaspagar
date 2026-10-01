@@ -13,7 +13,10 @@ import { ProveedorService } from '../services/proveedor.service';
           <p class="eyebrow">Directorio</p>
           <h1>Gestión de proveedores</h1>
         </div>
-        <a routerLink="/proveedores/nuevo" class="button button-primary">+ Nuevo proveedor</a>
+        <div class="header-actions">
+          <a routerLink="/ventas" class="button button-secondary">Ventas</a>
+          <a routerLink="/proveedores/nuevo" class="button button-primary">+ Nuevo proveedor</a>
+        </div>
       </header>
 
       @if (cargando()) {
@@ -85,6 +88,12 @@ import { ProveedorService } from '../services/proveedor.service';
       margin-bottom: 28px;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .eyebrow {
       margin: 0 0 8px;
       color: #467458;
@@ -116,6 +125,17 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .button-primary:hover {
       background: #1d5235;
+    }
+
+    .button-secondary {
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid #aebbb1;
+      border-radius: 4px;
+      color: #34443a;
+      background: #fff;
+      text-decoration: none;
+      font-weight: 600;
     }
 
     .table-wrap {
@@ -203,6 +223,10 @@ import { ProveedorService } from '../services/proveedor.service';
       .page-header {
         align-items: start;
         flex-direction: column;
+      }
+
+      .header-actions {
+        flex-wrap: wrap;
       }
 
       h1 {
