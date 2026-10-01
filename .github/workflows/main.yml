@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - DesarroloFrontVentas
-  pull_request:
-    branches:
-      - DesarroloFrontVentas
 
 jobs:
   build:
@@ -32,3 +29,22 @@ jobs:
         with:
           name: angular-dist
           path: dist/frontventas
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: angular-dist
+          path: dist/cuentsapagar
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/frontventas
