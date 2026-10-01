@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - DesarrolloFrontVentas
+      - Frontcuentaspagar
   pull_request:
     branches:
       - main
