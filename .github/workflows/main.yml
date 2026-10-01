@@ -3,7 +3,11 @@ name: Angular CI/CD
 on:
   push:
     branches:
-      - DesarroloFrontVentas
+      - main
+      - DesarrolloFrontVentas
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
