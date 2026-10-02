@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-dist
-          path: dist/cuentsapagar
+          path: dist/cuentaspagar/browser
 
   deploy:
     needs: build
@@ -45,7 +45,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: angular-dist
-          path: dist/cuentsapagar
+          path: dist/cuentaspagar/browser
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
