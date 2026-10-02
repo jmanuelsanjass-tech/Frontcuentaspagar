@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - main
-      - Frontcuentaspagar
   pull_request:
     branches:
       - main
-      - Frontcuentaspagar
 
 jobs:
   build:
