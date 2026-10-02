@@ -32,12 +32,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: angular-dist
-          path: dist/cuentaspagar/browser
-          
+          path: dist/cuentaspagar/browser   # <-- igual al angular.json
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -46,11 +46,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: angular-dist
-          path: dist/cuentaspagar/browser
+          path: dist/cuentaspagar/browser   # <-- igual al angular.json
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/cuentaspagar/browser
+          publish_dir: dist/cuentaspagar/browser   # <-- igual al angular.json
           publish_branch: gh-pages
