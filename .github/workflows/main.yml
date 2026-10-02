@@ -46,10 +46,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: angular-dist
-          path: dist/cuentaspagar
+          path: dist/cuentaspagar/browser
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/cuentaspagar
+          publish_dir: dist/cuentaspagar/browser
+          publish_branch: gh-pages
