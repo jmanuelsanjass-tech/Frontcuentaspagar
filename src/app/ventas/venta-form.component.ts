@@ -147,15 +147,15 @@ import { RouterLink } from '@angular/router';
     :host {
       display: block;
       min-height: 100vh;
-      color: #202a24;
-      background: #f5f7f4;
+      color: #34271f;
+      background: #fbf5ed;
       font-family: "Segoe UI", sans-serif;
     }
 
     .page {
       width: min(900px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 0;
+      padding: 56px 0 72px;
     }
 
     .page-header {
@@ -178,7 +178,7 @@ import { RouterLink } from '@angular/router';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #467458;
+      color: #843e22;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -186,27 +186,28 @@ import { RouterLink } from '@angular/router';
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(28px, 4vw, 36px);
       font-weight: 650;
     }
 
     .back-link {
-      color: #286744;
+      color: #843e22;
       font-weight: 600;
       text-decoration: none;
     }
 
     form {
-      padding: 24px;
-      border: 1px solid #d9e0da;
-      border-radius: 4px;
-      background: #fff;
+      padding: 28px;
+      border: 1px solid #e8d8c8;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
     }
 
     .section + .section {
       margin-top: 32px;
       padding-top: 28px;
-      border-top: 1px solid #e2e8e3;
+      border-top: 1px solid #eadfd3;
     }
 
     .section-heading {
@@ -219,7 +220,7 @@ import { RouterLink } from '@angular/router';
 
     .section-kicker {
       margin: 0 0 5px;
-      color: #64736a;
+      color: #69564a;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -227,13 +228,13 @@ import { RouterLink } from '@angular/router';
 
     h2 {
       margin: 0;
-      color: #202a24;
+      color: #4a2c1e;
       font-size: 21px;
       font-weight: 650;
     }
 
     .item-count {
-      color: #526158;
+      color: #69564a;
       font-size: 14px;
       font-weight: 600;
     }
@@ -257,8 +258,9 @@ import { RouterLink } from '@angular/router';
     .table-wrap {
       margin-top: 22px;
       overflow-x: auto;
-      border: 1px solid #d9e0da;
-      border-radius: 3px;
+      border: 1px solid #e8d8c8;
+      border-radius: 8px;
+      background: #fffefa;
     }
 
     table {
@@ -270,7 +272,7 @@ import { RouterLink } from '@angular/router';
     th,
     td {
       padding: 12px 14px;
-      border-bottom: 1px solid #e6ebe6;
+      border-bottom: 1px solid #eee3d8;
       font-size: 14px;
     }
 
@@ -281,8 +283,8 @@ import { RouterLink } from '@angular/router';
     }
 
     th {
-      color: #34443a;
-      background: #f5f7f4;
+      color: #4a2c1e;
+      background: #f8eadd;
       font-weight: 650;
       white-space: nowrap;
     }
@@ -298,7 +300,7 @@ import { RouterLink } from '@angular/router';
 
     .empty-row {
       padding: 24px;
-      color: #64736a;
+      color: #69564a;
       text-align: center;
     }
 
@@ -309,8 +311,8 @@ import { RouterLink } from '@angular/router';
     }
 
     .total-field input {
-      color: #1d5235;
-      background: #edf4ee;
+      color: #793719;
+      background: #fbf1e6;
       font-weight: 700;
     }
 
@@ -331,10 +333,10 @@ import { RouterLink } from '@angular/router';
       width: 100%;
       min-height: 42px;
       padding: 9px 11px;
-      border: 1px solid #aebbb1;
-      border-radius: 3px;
-      color: #202a24;
-      background: #fff;
+      border: 1px solid #cbb8a7;
+      border-radius: 6px;
+      color: #34271f;
+      background: #fffefa;
       font: inherit;
     }
 
@@ -342,24 +344,24 @@ import { RouterLink } from '@angular/router';
     select:focus-visible,
     a:focus-visible,
     button:focus-visible {
-      outline: 3px solid #d18b2c;
+      outline: 3px solid #984923;
       outline-offset: 2px;
     }
 
     input[aria-invalid="true"],
     select[aria-invalid="true"] {
-      border-color: #a33d35;
+      border-color: #a23b2b;
     }
 
     .field-error {
       margin: 0;
-      color: #a33d35;
+      color: #a23b2b;
       font-size: 13px;
     }
 
     .message {
       margin: 20px 0 0;
-      color: #286744;
+      color: #843e22;
     }
 
     .form-actions {
@@ -368,7 +370,7 @@ import { RouterLink } from '@angular/router';
       gap: 12px;
       margin-top: 28px;
       padding-top: 20px;
-      border-top: 1px solid #e6ebe6;
+      border-top: 1px solid #eee3d8;
     }
 
     .button {
@@ -378,7 +380,7 @@ import { RouterLink } from '@angular/router';
       min-height: 42px;
       padding: 0 16px;
       border: 1px solid transparent;
-      border-radius: 4px;
+      border-radius: 7px;
       font: inherit;
       font-weight: 600;
       cursor: pointer;
@@ -386,17 +388,17 @@ import { RouterLink } from '@angular/router';
 
     .button-primary {
       color: #fff;
-      background: #286744;
+      background: #843e22;
     }
 
     .button-primary:hover {
-      background: #1d5235;
+      background: #6d3019;
     }
 
     .button-secondary {
-      border-color: #aebbb1;
-      color: #34443a;
-      background: #fff;
+      border-color: #e2d2c1;
+      color: #4a2c1e;
+      background: #fffdf9;
     }
 
     @media (max-width: 600px) {

@@ -69,15 +69,15 @@ import { ProveedorService } from '../services/proveedor.service';
     :host {
       display: block;
       min-height: 100vh;
-      color: #202a24;
-      background: #f5f7f4;
+      color: #34271f;
+      background: #fbf5ed;
       font-family: "Segoe UI", sans-serif;
     }
 
     .page {
       width: min(1100px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 0;
+      padding: 56px 0 72px;
     }
 
     .page-header {
@@ -96,7 +96,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #467458;
+      color: #843e22;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -104,7 +104,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(28px, 4vw, 36px);
       font-weight: 650;
     }
 
@@ -113,36 +113,39 @@ import { ProveedorService } from '../services/proveedor.service';
       align-items: center;
       min-height: 42px;
       padding: 0 16px;
-      border-radius: 4px;
+      border-radius: 7px;
       text-decoration: none;
       font-weight: 600;
+      transition: background-color 140ms ease, transform 140ms ease;
     }
 
     .button-primary {
       color: #fff;
-      background: #286744;
+      background: #843e22;
     }
 
-    .button-primary:hover {
-      background: #1d5235;
+    .button-primary:hover:not(:disabled) {
+      background: #6d3019;
+      transform: translateY(-1px);
     }
 
     .button-secondary {
       min-height: 42px;
       padding: 0 16px;
-      border: 1px solid #aebbb1;
-      border-radius: 4px;
-      color: #34443a;
-      background: #fff;
+      border: 1px solid #e2d2c1;
+      border-radius: 7px;
+      color: #4a2c1e;
+      background: #fffdf9;
       text-decoration: none;
       font-weight: 600;
     }
 
     .table-wrap {
       overflow-x: auto;
-      border-top: 1px solid #d9e0da;
-      border-bottom: 1px solid #d9e0da;
-      background: #fff;
+      border: 1px solid #e8d8c8;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
     }
 
     table {
@@ -163,12 +166,12 @@ import { ProveedorService } from '../services/proveedor.service';
     th,
     td {
       padding: 14px 16px;
-      border-bottom: 1px solid #e6ebe6;
+      border-bottom: 1px solid #eee3d8;
       white-space: nowrap;
     }
 
     th {
-      color: #536258;
+      color: #69564a;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -184,14 +187,14 @@ import { ProveedorService } from '../services/proveedor.service';
     .actions button {
       padding: 0;
       border: 0;
-      color: #286744;
+      color: #843e22;
       background: transparent;
       font: inherit;
       cursor: pointer;
     }
 
     .actions button {
-      color: #a33d35;
+      color: #a23b2b;
     }
 
     .actions button:disabled {
@@ -201,17 +204,17 @@ import { ProveedorService } from '../services/proveedor.service';
 
     a:focus-visible,
     button:focus-visible {
-      outline: 3px solid #d18b2c;
+      outline: 3px solid #984923;
       outline-offset: 3px;
     }
 
     .message {
       padding: 20px 0;
-      color: #536258;
+      color: #69564a;
     }
 
     .message-error {
-      color: #a33d35;
+      color: #a23b2b;
     }
 
     @media (max-width: 640px) {

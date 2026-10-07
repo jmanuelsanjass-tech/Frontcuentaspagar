@@ -99,15 +99,15 @@ import { ProveedorService } from '../services/proveedor.service';
     :host {
       display: block;
       min-height: 100vh;
-      color: #202a24;
-      background: #f5f7f4;
+      color: #34271f;
+      background: #fbf5ed;
       font-family: "Segoe UI", sans-serif;
     }
 
     .page {
       width: min(760px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 0;
+      padding: 56px 0 72px;
     }
 
     .page-header {
@@ -120,7 +120,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #467458;
+      color: #843e22;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -128,27 +128,28 @@ import { ProveedorService } from '../services/proveedor.service';
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(28px, 4vw, 36px);
       font-weight: 650;
     }
 
     .back-link {
-      color: #286744;
+      color: #843e22;
       font-weight: 600;
       text-decoration: none;
     }
 
     form {
-      padding: 24px;
-      border: 1px solid #d9e0da;
-      border-radius: 4px;
-      background: #fff;
+      padding: 30px;
+      border: 1px solid #e8d8c8;
+      border-radius: 14px;
+      background: #fffdf9;
+      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+      gap: 22px;
     }
 
     .field {
@@ -171,27 +172,27 @@ import { ProveedorService } from '../services/proveedor.service';
       width: 100%;
       min-height: 42px;
       padding: 9px 11px;
-      border: 1px solid #aebbb1;
-      border-radius: 3px;
-      color: #202a24;
-      background: #fff;
+      border: 1px solid #cbb8a7;
+      border-radius: 6px;
+      color: #34271f;
+      background: #fffefa;
       font: inherit;
     }
 
     input:focus-visible,
     a:focus-visible,
     button:focus-visible {
-      outline: 3px solid #d18b2c;
+      outline: 3px solid #984923;
       outline-offset: 2px;
     }
 
     input[aria-invalid="true"] {
-      border-color: #a33d35;
+      border-color: #a23b2b;
     }
 
     .field-error {
       margin: 0;
-      color: #a33d35;
+      color: #a23b2b;
       font-size: 13px;
     }
 
@@ -201,7 +202,7 @@ import { ProveedorService } from '../services/proveedor.service';
       gap: 12px;
       margin-top: 28px;
       padding-top: 20px;
-      border-top: 1px solid #e6ebe6;
+      border-top: 1px solid #eee3d8;
     }
 
     .button {
@@ -211,7 +212,7 @@ import { ProveedorService } from '../services/proveedor.service';
       min-height: 42px;
       padding: 0 16px;
       border: 1px solid transparent;
-      border-radius: 4px;
+      border-radius: 7px;
       font: inherit;
       font-weight: 600;
       text-decoration: none;
@@ -220,11 +221,11 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .button-primary {
       color: #fff;
-      background: #286744;
+      background: #843e22;
     }
 
     .button-primary:hover:not(:disabled) {
-      background: #1d5235;
+      background: #6d3019;
     }
 
     .button-primary:disabled {
@@ -233,17 +234,17 @@ import { ProveedorService } from '../services/proveedor.service';
     }
 
     .button-secondary {
-      border-color: #aebbb1;
-      color: #34443a;
-      background: #fff;
+      border-color: #e2d2c1;
+      color: #4a2c1e;
+      background: #fffdf9;
     }
 
     .message {
-      color: #536258;
+      color: #69564a;
     }
 
     .message-error {
-      color: #a33d35;
+      color: #a23b2b;
     }
 
     @media (max-width: 600px) {
@@ -262,7 +263,7 @@ import { ProveedorService } from '../services/proveedor.service';
       }
 
       form {
-        padding: 18px;
+        padding: 20px;
       }
 
       .form-grid {

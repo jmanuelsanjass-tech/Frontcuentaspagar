@@ -1,0 +1,92 @@
+.app-header {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 max(24px, calc((100% - 1100px) / 2));
+  border-bottom: 1px solid #e8d8c8;
+  color: #34271f;
+  background: #fffdf9;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 9px;
+  color: #fff;
+  background: #843e22;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.main-nav a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 13px;
+  border-radius: 5px;
+  color: #69564a;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 120ms ease, background-color 120ms ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: #6d3019;
+  background: #f8eadd;
+}
+
+.main-nav a:focus-visible,
+.brand:focus-visible {
+  outline: 3px solid #843e22;
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 20px 0;
+  }
+
+  .main-nav {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .main-nav a {
+    flex: 0 0 auto;
+    padding: 0 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-nav a {
+    transition: none;
+  }
+}
