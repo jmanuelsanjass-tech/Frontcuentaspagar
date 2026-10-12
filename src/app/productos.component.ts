@@ -155,8 +155,8 @@ interface Producto {
       display: block;
       min-height: calc(100vh - 76px);
       padding: 32px 0 48px;
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: 'Segoe UI', sans-serif;
     }
 
@@ -167,7 +167,7 @@ interface Producto {
 
     .eyebrow {
       margin: 0 0 10px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -182,11 +182,11 @@ interface Producto {
 
     .product-list {
       margin-top: 24px;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #fffdf9;
+      background: #ffffff;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
+      box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
     }
 
     .section-heading {
@@ -195,14 +195,14 @@ interface Producto {
       justify-content: space-between;
       gap: 20px;
       padding: 20px 24px;
-      border-bottom: 1px solid #eadfd3;
+      border-bottom: 1px solid #dbe4f0;
     }
 
     .section-heading p,
     .status,
     .error {
       margin: 0;
-      color: #69564a;
+      color: #52637a;
       line-height: 1.5;
     }
 
@@ -231,15 +231,15 @@ interface Producto {
       border: 0;
       border-radius: 4px;
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
       font-weight: 650;
       text-decoration: none;
       cursor: pointer;
     }
 
     .button.secondary {
-      color: #34271f;
-      background: #f1e4d8;
+      color: #172b4d;
+      background: #eaf1ff;
     }
 
     .button:disabled {
@@ -248,14 +248,14 @@ interface Producto {
     }
 
     .button:focus-visible {
-      outline: 3px solid #4a2c1e;
+      outline: 3px solid #123b8a;
       outline-offset: 3px;
     }
 
     .edit-form {
       padding: 24px;
-      border-bottom: 1px solid #eadfd3;
-      background: #fcf8f2;
+      border-bottom: 1px solid #dbe4f0;
+      background: #f7f9fc;
     }
 
     .edit-heading h3 {
@@ -265,7 +265,7 @@ interface Producto {
 
     .edit-heading p {
       margin: 6px 0 20px;
-      color: #69564a;
+      color: #52637a;
     }
 
     .edit-fields {
@@ -305,10 +305,10 @@ interface Producto {
       width: 100%;
       box-sizing: border-box;
       padding: 10px 12px;
-      border: 1px solid #cbb8a7;
+      border: 1px solid #c5d0df;
       border-radius: 4px;
-      color: #34271f;
-      background: #fffefa;
+      color: #172b4d;
+      background: #ffffff;
       font: inherit;
     }
 
@@ -319,7 +319,7 @@ interface Producto {
 
     input:focus-visible,
     textarea:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -344,7 +344,7 @@ interface Producto {
     }
 
     .table-scroll:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -360,14 +360,14 @@ interface Producto {
       position: sticky;
       top: 0;
       z-index: 1;
-      color: #4a2c1e;
-      background: #f8eadd;
+      color: #123b8a;
+      background: #eaf1ff;
     }
 
     th,
     td {
       padding: 12px 14px;
-      border-bottom: 1px solid #eee3d8;
+      border-bottom: 1px solid #dbe4f0;
     }
 
     th {
@@ -375,14 +375,14 @@ interface Producto {
     }
 
     tbody tr:hover {
-      background: #fcf8f2;
+      background: #f7f9fc;
     }
 
     .edit-button {
       padding: 6px 10px;
-      border: 1px solid #984923;
+      border: 1px solid #1d4ed8;
       border-radius: 4px;
-      color: #793719;
+      color: #1d4ed8;
       background: #fff;
       font: inherit;
       font-weight: 650;
@@ -390,11 +390,11 @@ interface Producto {
     }
 
     .edit-button:hover:not(:disabled) {
-      background: #fbf1e6;
+      background: #eff6ff;
     }
 
     .edit-button:focus-visible {
-      outline: 3px solid #4a2c1e;
+      outline: 3px solid #123b8a;
       outline-offset: 3px;
     }
 
@@ -403,8 +403,8 @@ interface Producto {
       align-items: center;
       padding: 4px 8px;
       border-radius: 999px;
-      background: #f8eadd;
-      color: #793719;
+      background: #eaf1ff;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
     }

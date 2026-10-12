@@ -185,8 +185,8 @@ import { ClienteService } from '../services/cliente.service';
     :host {
       display: block;
       min-height: calc(100vh - 76px);
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -198,7 +198,7 @@ import { ClienteService } from '../services/cliente.service';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -212,18 +212,18 @@ import { ClienteService } from '../services/cliente.service';
 
     .client-list {
       margin-top: 32px;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #fffdf9;
-      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
     }
 
     .edit-form {
       display: grid;
       gap: 18px;
       padding: 24px;
-      border-bottom: 1px solid #eadfd3;
-      background: #fcf8f2;
+      border-bottom: 1px solid #dbe4f0;
+      background: #f7f9fc;
     }
 
     .edit-heading h3 {
@@ -233,7 +233,7 @@ import { ClienteService } from '../services/cliente.service';
 
     .edit-heading p {
       margin: 5px 0 0;
-      color: #69564a;
+      color: #52637a;
       font-size: 14px;
     }
 
@@ -259,16 +259,16 @@ import { ClienteService } from '../services/cliente.service';
       width: 100%;
       min-height: 40px;
       padding: 8px 10px;
-      border: 1px solid #cbb8a7;
+      border: 1px solid #c5d0df;
       border-radius: 4px;
-      color: #34271f;
-      background: #fffefa;
+      color: #172b4d;
+      background: #ffffff;
       font: inherit;
     }
 
     .field input:focus-visible,
     .field select:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -292,15 +292,15 @@ import { ClienteService } from '../services/cliente.service';
     }
 
     .edit-actions .secondary {
-      color: #34271f;
-      background: #f1e4d8;
+      color: #172b4d;
+      background: #eaf1ff;
     }
 
     .edit-button {
       padding: 6px 10px;
-      border: 1px solid #984923;
+      border: 1px solid #1d4ed8;
       border-radius: 4px;
-      color: #793719;
+      color: #1d4ed8;
       background: #fff;
       font: inherit;
       font-weight: 650;
@@ -308,12 +308,12 @@ import { ClienteService } from '../services/cliente.service';
     }
 
     .edit-button:hover:not(:disabled) {
-      background: #fbf1e6;
+      background: #eff6ff;
     }
 
     .edit-button:focus-visible,
     .edit-actions .button:focus-visible {
-      outline: 3px solid #4a2c1e;
+      outline: 3px solid #123b8a;
       outline-offset: 3px;
     }
 
@@ -332,7 +332,7 @@ import { ClienteService } from '../services/cliente.service';
       justify-content: space-between;
       gap: 20px;
       padding: 20px 24px;
-      border-bottom: 1px solid #eadfd3;
+      border-bottom: 1px solid #dbe4f0;
     }
 
     .heading-actions {
@@ -350,7 +350,7 @@ import { ClienteService } from '../services/cliente.service';
     .status,
     .error {
       margin: 0;
-      color: #69564a;
+      color: #52637a;
       line-height: 1.5;
     }
 
@@ -374,7 +374,7 @@ import { ClienteService } from '../services/cliente.service';
     }
 
     .table-scroll:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -390,14 +390,14 @@ import { ClienteService } from '../services/cliente.service';
       position: sticky;
       top: 0;
       z-index: 1;
-      color: #4a2c1e;
-      background: #f8eadd;
+      color: #123b8a;
+      background: #eaf1ff;
     }
 
     th,
     td {
       padding: 12px 14px;
-      border-bottom: 1px solid #eee3d8;
+      border-bottom: 1px solid #dbe4f0;
     }
 
     th {
@@ -405,7 +405,7 @@ import { ClienteService } from '../services/cliente.service';
     }
 
     tbody tr:hover {
-      background: #fcf8f2;
+      background: #f7f9fc;
     }
 
     .button {
@@ -416,7 +416,7 @@ import { ClienteService } from '../services/cliente.service';
       padding: 0 16px;
       border-radius: 4px;
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
       font-weight: 650;
       text-decoration: none;
     }
@@ -433,12 +433,12 @@ import { ClienteService } from '../services/cliente.service';
     }
 
     .button.secondary {
-      color: #34271f;
-      background: #f1e4d8;
+      color: #172b4d;
+      background: #eaf1ff;
     }
 
     .button:focus-visible {
-      outline: 3px solid #4a2c1e;
+      outline: 3px solid #123b8a;
       outline-offset: 3px;
     }
 

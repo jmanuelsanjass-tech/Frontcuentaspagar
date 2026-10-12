@@ -69,8 +69,8 @@ import { ProveedorService } from '../services/proveedor.service';
     :host {
       display: block;
       min-height: 100vh;
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -96,7 +96,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -121,31 +121,31 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .button-primary {
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
     }
 
     .button-primary:hover:not(:disabled) {
-      background: #6d3019;
+      background: #1e40af;
       transform: translateY(-1px);
     }
 
     .button-secondary {
       min-height: 42px;
       padding: 0 16px;
-      border: 1px solid #e2d2c1;
+      border: 1px solid #dbe4f0;
       border-radius: 7px;
-      color: #4a2c1e;
-      background: #fffdf9;
+      color: #123b8a;
+      background: #ffffff;
       text-decoration: none;
       font-weight: 600;
     }
 
     .table-wrap {
       overflow-x: auto;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #fffdf9;
-      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
     }
 
     table {
@@ -166,12 +166,12 @@ import { ProveedorService } from '../services/proveedor.service';
     th,
     td {
       padding: 14px 16px;
-      border-bottom: 1px solid #eee3d8;
+      border-bottom: 1px solid #dbe4f0;
       white-space: nowrap;
     }
 
     th {
-      color: #69564a;
+      color: #52637a;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -187,7 +187,7 @@ import { ProveedorService } from '../services/proveedor.service';
     .actions button {
       padding: 0;
       border: 0;
-      color: #843e22;
+      color: #1d4ed8;
       background: transparent;
       font: inherit;
       cursor: pointer;
@@ -204,13 +204,13 @@ import { ProveedorService } from '../services/proveedor.service';
 
     a:focus-visible,
     button:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 3px;
     }
 
     .message {
       padding: 20px 0;
-      color: #69564a;
+      color: #52637a;
     }
 
     .message-error {

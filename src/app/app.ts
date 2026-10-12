@@ -37,7 +37,7 @@ import { AuthService } from './services/auth.service';
       border: 0;
       padding: 0 13px;
       border-radius: 5px;
-      color: #69564a;
+      color: #52637a;
       background: transparent;
       font-family: inherit;
       font-size: 14px;
@@ -47,12 +47,12 @@ import { AuthService } from './services/auth.service';
     }
 
     .nav-action:hover:not(:disabled) {
-      color: #6d3019;
-      background: #f8eadd;
+      color: #1e40af;
+      background: #eaf1ff;
     }
 
     .nav-action:focus-visible {
-      outline: 3px solid #843e22;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 

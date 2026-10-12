@@ -5,9 +5,9 @@
   justify-content: space-between;
   gap: 24px;
   padding: 0 max(24px, calc((100% - 1100px) / 2));
-  border-bottom: 1px solid #e8d8c8;
-  color: #34271f;
-  background: #fffdf9;
+  border-bottom: 1px solid #dbe4f0;
+  color: #172b4d;
+  background: #ffffff;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -29,7 +29,7 @@
   place-items: center;
   border-radius: 9px;
   color: #fff;
-  background: #843e22;
+  background: #1d4ed8;
   font-size: 12px;
   letter-spacing: 0.02em;
 }
@@ -46,7 +46,7 @@
   align-items: center;
   padding: 0 13px;
   border-radius: 5px;
-  color: #69564a;
+  color: #52637a;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -55,13 +55,13 @@
 
 .main-nav a:hover,
 .main-nav a.active {
-  color: #6d3019;
-  background: #f8eadd;
+  color: #1e40af;
+  background: #eaf1ff;
 }
 
 .main-nav a:focus-visible,
 .brand:focus-visible {
-  outline: 3px solid #843e22;
+  outline: 3px solid #1d4ed8;
   outline-offset: 3px;
 }
 

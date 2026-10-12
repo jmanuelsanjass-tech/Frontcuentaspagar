@@ -147,8 +147,8 @@ import { RouterLink } from '@angular/router';
     :host {
       display: block;
       min-height: 100vh;
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -178,7 +178,7 @@ import { RouterLink } from '@angular/router';
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -191,23 +191,23 @@ import { RouterLink } from '@angular/router';
     }
 
     .back-link {
-      color: #843e22;
+      color: #1d4ed8;
       font-weight: 600;
       text-decoration: none;
     }
 
     form {
       padding: 28px;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #fffdf9;
-      box-shadow: 0 10px 30px rgb(88 52 30 / 6%);
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
     }
 
     .section + .section {
       margin-top: 32px;
       padding-top: 28px;
-      border-top: 1px solid #eadfd3;
+      border-top: 1px solid #dbe4f0;
     }
 
     .section-heading {
@@ -220,7 +220,7 @@ import { RouterLink } from '@angular/router';
 
     .section-kicker {
       margin: 0 0 5px;
-      color: #69564a;
+      color: #52637a;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -228,13 +228,13 @@ import { RouterLink } from '@angular/router';
 
     h2 {
       margin: 0;
-      color: #4a2c1e;
+      color: #123b8a;
       font-size: 21px;
       font-weight: 650;
     }
 
     .item-count {
-      color: #69564a;
+      color: #52637a;
       font-size: 14px;
       font-weight: 600;
     }
@@ -258,9 +258,9 @@ import { RouterLink } from '@angular/router';
     .table-wrap {
       margin-top: 22px;
       overflow-x: auto;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 8px;
-      background: #fffefa;
+      background: #ffffff;
     }
 
     table {
@@ -272,7 +272,7 @@ import { RouterLink } from '@angular/router';
     th,
     td {
       padding: 12px 14px;
-      border-bottom: 1px solid #eee3d8;
+      border-bottom: 1px solid #dbe4f0;
       font-size: 14px;
     }
 
@@ -283,8 +283,8 @@ import { RouterLink } from '@angular/router';
     }
 
     th {
-      color: #4a2c1e;
-      background: #f8eadd;
+      color: #123b8a;
+      background: #eaf1ff;
       font-weight: 650;
       white-space: nowrap;
     }
@@ -300,7 +300,7 @@ import { RouterLink } from '@angular/router';
 
     .empty-row {
       padding: 24px;
-      color: #69564a;
+      color: #52637a;
       text-align: center;
     }
 
@@ -311,8 +311,8 @@ import { RouterLink } from '@angular/router';
     }
 
     .total-field input {
-      color: #793719;
-      background: #fbf1e6;
+      color: #1d4ed8;
+      background: #eff6ff;
       font-weight: 700;
     }
 
@@ -333,10 +333,10 @@ import { RouterLink } from '@angular/router';
       width: 100%;
       min-height: 42px;
       padding: 9px 11px;
-      border: 1px solid #cbb8a7;
+      border: 1px solid #c5d0df;
       border-radius: 6px;
-      color: #34271f;
-      background: #fffefa;
+      color: #172b4d;
+      background: #ffffff;
       font: inherit;
     }
 
@@ -344,7 +344,7 @@ import { RouterLink } from '@angular/router';
     select:focus-visible,
     a:focus-visible,
     button:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -361,7 +361,7 @@ import { RouterLink } from '@angular/router';
 
     .message {
       margin: 20px 0 0;
-      color: #843e22;
+      color: #1d4ed8;
     }
 
     .form-actions {
@@ -370,7 +370,7 @@ import { RouterLink } from '@angular/router';
       gap: 12px;
       margin-top: 28px;
       padding-top: 20px;
-      border-top: 1px solid #eee3d8;
+      border-top: 1px solid #dbe4f0;
     }
 
     .button {
@@ -388,17 +388,17 @@ import { RouterLink } from '@angular/router';
 
     .button-primary {
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
     }
 
     .button-primary:hover {
-      background: #6d3019;
+      background: #1e40af;
     }
 
     .button-secondary {
-      border-color: #e2d2c1;
-      color: #4a2c1e;
-      background: #fffdf9;
+      border-color: #dbe4f0;
+      color: #123b8a;
+      background: #ffffff;
     }
 
     @media (max-width: 600px) {

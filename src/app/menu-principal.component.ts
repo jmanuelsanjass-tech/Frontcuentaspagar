@@ -44,8 +44,8 @@ import { RouterLink } from '@angular/router';
     :host {
       display: block;
       min-height: calc(100vh - 76px);
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -59,15 +59,15 @@ import { RouterLink } from '@angular/router';
       position: relative;
       margin-bottom: 30px;
       padding: 32px 36px;
-      border: 1px solid #ead8c5;
+      border: 1px solid #dbe4f0;
       border-radius: 18px;
-      background: linear-gradient(115deg, #fffdf9 0%, #f8eadd 100%);
-      box-shadow: 0 12px 32px rgb(88 52 30 / 6%);
+      background: linear-gradient(115deg, #ffffff 0%, #eaf1ff 100%);
+      box-shadow: 0 12px 32px rgb(30 64 175 / 6%);
     }
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -82,7 +82,7 @@ import { RouterLink } from '@angular/router';
 
     .welcome-copy {
       margin: 12px 0 0;
-      color: #69564a;
+      color: #52637a;
       font-size: 16px;
     }
 
@@ -97,23 +97,23 @@ import { RouterLink } from '@angular/router';
       min-height: 210px;
       align-content: start;
       padding: 26px;
-      border: 1px solid #eadfd3;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
       color: inherit;
-      background: #fffdf9;
+      background: #ffffff;
       text-decoration: none;
-      box-shadow: 0 5px 18px rgb(88 52 30 / 4%);
+      box-shadow: 0 5px 18px rgb(30 64 175 / 4%);
       transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
     }
 
     .module-card:hover {
       transform: translateY(-2px);
-      border-color: #c58d6b;
-      box-shadow: 0 10px 26px rgb(88 52 30 / 11%);
+      border-color: #9bb9ef;
+      box-shadow: 0 10px 26px rgb(30 64 175 / 11%);
     }
 
     .module-card:focus-visible {
-      outline: 3px solid #843e22;
+      outline: 3px solid #1d4ed8;
       outline-offset: 3px;
     }
 
@@ -129,23 +129,23 @@ import { RouterLink } from '@angular/router';
     }
 
     .suppliers-icon {
-      color: #843e22;
-      background: #f8eadd;
+      color: #1d4ed8;
+      background: #eaf1ff;
     }
 
     .sales-icon {
-      color: #80551b;
-      background: #fbf1e6;
+      color: #1e40af;
+      background: #eff6ff;
     }
 
     .customers-icon {
-      color: #79533d;
-      background: #f2e6dc;
+      color: #315b9c;
+      background: #e3edff;
     }
 
     .products-icon {
-      color: #843e22;
-      background: #f8eadd;
+      color: #1d4ed8;
+      background: #eaf1ff;
     }
 
     .module-title {
@@ -155,7 +155,7 @@ import { RouterLink } from '@angular/router';
 
     .module-description {
       margin-top: 8px;
-      color: #69564a;
+      color: #52637a;
       font-size: 14px;
       line-height: 1.5;
     }
@@ -166,7 +166,7 @@ import { RouterLink } from '@angular/router';
       align-items: center;
       margin-top: auto;
       padding-top: 22px;
-      color: #843e22;
+      color: #1d4ed8;
       font-size: 14px;
       font-weight: 700;
     }

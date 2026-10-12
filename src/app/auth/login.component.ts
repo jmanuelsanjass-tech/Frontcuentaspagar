@@ -77,8 +77,8 @@ import { AuthService } from '../services/auth.service';
     :host {
       display: block;
       min-height: calc(100vh - 76px);
-      color: #34271f;
-      background: #fbf5ed;
+      color: #172b4d;
+      background: #f4f7fb;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -93,10 +93,10 @@ import { AuthService } from '../services/auth.service';
       box-sizing: border-box;
       width: min(420px, 100%);
       padding: 32px;
-      border: 1px solid #e8d8c8;
+      border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #fffdf9;
-      box-shadow: 0 16px 40px rgb(88 52 30 / 10%);
+      background: #ffffff;
+      box-shadow: 0 16px 40px rgb(30 64 175 / 10%);
     }
 
     .login-card-header {
@@ -133,18 +133,18 @@ import { AuthService } from '../services/auth.service';
       place-items: center;
       border-radius: 9px;
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
       font-size: 12px;
     }
 
     .brand:focus-visible {
-      outline: 3px solid #843e22;
+      outline: 3px solid #1d4ed8;
       outline-offset: 3px;
     }
 
     .eyebrow {
       margin: 0 0 8px;
-      color: #793719;
+      color: #1d4ed8;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -159,7 +159,7 @@ import { AuthService } from '../services/auth.service';
 
     .intro {
       margin: 10px 0 26px;
-      color: #69564a;
+      color: #52637a;
       font-size: 14px;
     }
 
@@ -183,15 +183,15 @@ import { AuthService } from '../services/auth.service';
       width: 100%;
       min-height: 44px;
       padding: 10px 12px;
-      border: 1px solid #cbb8a7;
+      border: 1px solid #c5d0df;
       border-radius: 4px;
-      color: #34271f;
-      background: #fffefa;
+      color: #172b4d;
+      background: #ffffff;
       font: inherit;
     }
 
     input:focus-visible {
-      outline: 3px solid #984923;
+      outline: 3px solid #1d4ed8;
       outline-offset: 2px;
     }
 
@@ -214,18 +214,18 @@ import { AuthService } from '../services/auth.service';
       border: 0;
       border-radius: 4px;
       color: #fff;
-      background: #843e22;
+      background: #1d4ed8;
       font: inherit;
       font-weight: 700;
       cursor: pointer;
     }
 
     button:hover:not(:disabled) {
-      background: #6d3019;
+      background: #1e40af;
     }
 
     button:focus-visible {
-      outline: 3px solid #4a2c1e;
+      outline: 3px solid #123b8a;
       outline-offset: 3px;
     }
 
@@ -236,13 +236,13 @@ import { AuthService } from '../services/auth.service';
 
     .register-link {
       margin: 22px 0 0;
-      color: #69564a;
+      color: #52637a;
       font-size: 14px;
       text-align: center;
     }
 
     .register-link a {
-      color: #793719;
+      color: #1d4ed8;
       font-weight: 650;
     }
   `,
