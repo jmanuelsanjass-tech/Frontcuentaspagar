@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 51a4cd9fd084c5cb9ad3e362d3d2824f33c8820c jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790966555 -0600	commit (initial): init gh-pages
+51a4cd9fd084c5cb9ad3e362d3d2824f33c8820c 770baf3425fc37ecd6e03cbd8b8aa78ec5379bbf jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791388751 -0600	commit: Se agrega barra de navegación y estilos para la aplicación, se implementa el cierre de sesión y se protegen las rutas con AuthGuard.
+770baf3425fc37ecd6e03cbd8b8aa78ec5379bbf b7c9b48d7e8e353a0370352765e0fa6c5fbc138b jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791824936 -0600	commit: Habitar entornos y se aplica cambios a nube
+b7c9b48d7e8e353a0370352765e0fa6c5fbc138b fe9c70770cc5afe955ccccc2b1b5789c2099080d jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791825469 -0600	commit: Compliacion en prods
+fe9c70770cc5afe955ccccc2b1b5789c2099080d c688501836efb137372464fbf90eb010790fac78 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791825822 -0600	commit: subir a main branch
+c688501836efb137372464fbf90eb010790fac78 a6608c2a28ffbc87046c8f1f2f8bbe3d588f80be jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791826423 -0600	commit (merge): Merge remoto con local

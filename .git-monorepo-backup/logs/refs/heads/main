@@ -1,0 +1,28 @@
+0000000000000000000000000000000000000000 964d56d2269c9279ca0a58e3d36477039c1cb658 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790876536 -0600	clone: from github.com:jmanuelsanjass-tech/Frontcuentaspagar.git
+964d56d2269c9279ca0a58e3d36477039c1cb658 1c3c5ab58a6ef22a2c53f91a6a6cc464ab609614 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790893965 -0600	commit (merge): Cambios en Front fecha
+1c3c5ab58a6ef22a2c53f91a6a6cc464ab609614 da98088ecfdfc04d402b827f39e4803cb6dd55fc jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790895466 -0600	commit (merge): Actualizar upload-artifact a v4
+da98088ecfdfc04d402b827f39e4803cb6dd55fc 73bac034ad2021de1ae76924afd95ecf16ad8602 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790896590 -0600	commit: Cambios en versión Node 24
+73bac034ad2021de1ae76924afd95ecf16ad8602 f8980e3e1eab24a5f8610504607d679360078d57 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790950737 -0600	commit: Fix path for download-artifact
+f8980e3e1eab24a5f8610504607d679360078d57 430c065cd0e9ce5a938c42e7a856de628694864f jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790951787 -0600	commit: Fix path for download-artifact
+430c065cd0e9ce5a938c42e7a856de628694864f 7358f4bb2c484395600a3890997d8ea9c1e55205 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790952486 -0600	commit: Fix artifact path to match Angular output
+7358f4bb2c484395600a3890997d8ea9c1e55205 7f092286cc82c5407d6666d105ca082dcf30b41d jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790952669 -0600	commit: Fix artifact path to match Angular output
+7f092286cc82c5407d6666d105ca082dcf30b41d e209eb3d3b1c0fe52276dc37663211e413e39c06 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790952836 -0600	commit: Fix artifact path to match Angular output
+e209eb3d3b1c0fe52276dc37663211e413e39c06 406a4608e9db62e08fddd98f51ad5a965495e5f9 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790953892 -0600	commit: Definir outputPath y corregir pipeline
+406a4608e9db62e08fddd98f51ad5a965495e5f9 6f76228ff9edc71d196ebc6df4642fba5f96e0fc jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790964246 -0600	commit: Fix artifact path to dist/cuentaspagar/browser
+6f76228ff9edc71d196ebc6df4642fba5f96e0fc 8490dcd1c7153c002961dccc2706007c52f640ee jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790964725 -0600	commit: Fix artifact path to dist/cuentaspagar/browser
+8490dcd1c7153c002961dccc2706007c52f640ee cdb1a4110181f5ed839bef43cbf42842b107cae8 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790965126 -0600	commit: Fix outputPath and artifact path
+cdb1a4110181f5ed839bef43cbf42842b107cae8 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1790966367 -0600	commit: Fix outputPath and artifact path to dist/cuentasapagar/browser
+1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e a6608c2a28ffbc87046c8f1f2f8bbe3d588f80be jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791826568 -0600	reset: moving to gh-pages
+a6608c2a28ffbc87046c8f1f2f8bbe3d588f80be 7598006282299a19630a3ce7e253e2cf68585f59 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791830228 -0600	commit: Merge remoto con local
+7598006282299a19630a3ce7e253e2cf68585f59 a6608c2a28ffbc87046c8f1f2f8bbe3d588f80be jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791830285 -0600	reset: moving to gh-pages
+a6608c2a28ffbc87046c8f1f2f8bbe3d588f80be 73e28bbd1d7d6d9049422bc50b9282385a064c61 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791830444 -0600	commit: endpoint público en la raíz
+73e28bbd1d7d6d9049422bc50b9282385a064c61 5bd1e0ff5c709380742076696e8cf2dff1ba5f12 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791830643 -0600	commit: endpoint público en la raíz
+5bd1e0ff5c709380742076696e8cf2dff1ba5f12 81bf616402a2e99310be5ff03c3a988a9daf93fe jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791831235 -0600	commit: endpoint público en la raíz correccion NODE
+81bf616402a2e99310be5ff03c3a988a9daf93fe 2e3940c5fe9547349151eaebb34b40c95e3554d8 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791831478 -0600	commit: endpoint público en la raíz correccion NODE
+2e3940c5fe9547349151eaebb34b40c95e3554d8 dbbb84b2caa37e076cd3a531570aa1504ab253a3 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791831591 -0600	commit: endpoint público en la raíz correccion NODE
+dbbb84b2caa37e076cd3a531570aa1504ab253a3 6dcc313758ec44bb4d04aa1c7bc524921ba03b85 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791832102 -0600	commit: endpoint público en la raíz correccion NODE
+6dcc313758ec44bb4d04aa1c7bc524921ba03b85 6f19708f85ff3ecb293b4ad79a882c799061ff22 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791832585 -0600	commit: endpoint público en la raíz Json Angelar
+6f19708f85ff3ecb293b4ad79a882c799061ff22 57f1ad51dca52e4c1f7197123b258ae1f8fedd1e jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791832741 -0600	commit: endpoint público en la raíz Json Angelar
+57f1ad51dca52e4c1f7197123b258ae1f8fedd1e fa90eae4468c8f75e123b9c87f0ed0b1cbe194b9 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791841410 -0600	commit: endpoint público en la raíz Json Workflow corregido
+fa90eae4468c8f75e123b9c87f0ed0b1cbe194b9 a5845943c5bbce975827a299045a269e6f7c505c jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791842136 -0600	commit: endpoint público en la raíz Json Workflow corregido
+a5845943c5bbce975827a299045a269e6f7c505c 04dc6a312ee25d92d1936bee48c2d6c022f11423 jmanuelsanjass-tech <jmanuel.san.jass@gmail.com> 1791902926 -0600	commit: endpoint público en la raíz Json Workflow MERGE
