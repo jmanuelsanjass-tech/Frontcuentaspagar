@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/cuentaspagar/browser",
+            "outputPath": "dist/cuentaspagar",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "baseHref": "/Frontcuentaspagar/",
