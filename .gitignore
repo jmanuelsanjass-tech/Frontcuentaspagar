@@ -91,3 +91,19 @@ yarn-error.log*
 *.swp
 *.swo
 *~
+# Backups
+.git-monorepo-backup/
+
+# Firebase
+.firebase/
+
+# VSCode personales
+.vscode/launch.json
+.vscode/tasks.json
+.vscode/mcp.json
+.vscode/*.code-workspace
+
+# Basura
+*.swp
+*.swo
+*~
