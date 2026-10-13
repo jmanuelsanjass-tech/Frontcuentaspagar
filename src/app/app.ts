@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
@@ -83,20 +82,10 @@ import { AuthService } from './services/auth.service';
       text-align: center;
     }
   `,
-=======
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-@Component({
-  imports: [RouterOutlet],
-  selector: 'app-root',
-  template: '<router-outlet />',
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('cuentaspagar');
-<<<<<<< HEAD
   protected readonly cerrandoSesion = signal(false);
   protected readonly errorCierre = signal('');
   protected readonly auth = inject(AuthService);
@@ -127,6 +116,4 @@ export class App {
     this.auth.clearAuthentication();
     void this.router.navigate(['/login']).finally(() => this.cerrandoSesion.set(false));
   }
-=======
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
 }

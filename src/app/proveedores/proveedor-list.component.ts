@@ -69,24 +69,15 @@ import { ProveedorService } from '../services/proveedor.service';
     :host {
       display: block;
       min-height: 100vh;
-<<<<<<< HEAD
       color: #172b4d;
       background: #f4f7fb;
-=======
-      color: #202a24;
-      background: #f5f7f4;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-family: "Segoe UI", sans-serif;
     }
 
     .page {
       width: min(1100px, calc(100% - 40px));
       margin: 0 auto;
-<<<<<<< HEAD
       padding: 56px 0 72px;
-=======
-      padding: 48px 0;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .page-header {
@@ -105,11 +96,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .eyebrow {
       margin: 0 0 8px;
-<<<<<<< HEAD
       color: #1d4ed8;
-=======
-      color: #467458;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -117,11 +104,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     h1 {
       margin: 0;
-<<<<<<< HEAD
       font-size: clamp(28px, 4vw, 36px);
-=======
-      font-size: 30px;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-weight: 650;
     }
 
@@ -130,66 +113,39 @@ import { ProveedorService } from '../services/proveedor.service';
       align-items: center;
       min-height: 42px;
       padding: 0 16px;
-<<<<<<< HEAD
       border-radius: 7px;
       text-decoration: none;
       font-weight: 600;
       transition: background-color 140ms ease, transform 140ms ease;
-=======
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .button-primary {
       color: #fff;
-<<<<<<< HEAD
       background: #1d4ed8;
     }
 
     .button-primary:hover:not(:disabled) {
       background: #1e40af;
       transform: translateY(-1px);
-=======
-      background: #286744;
-    }
-
-    .button-primary:hover {
-      background: #1d5235;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .button-secondary {
       min-height: 42px;
       padding: 0 16px;
-<<<<<<< HEAD
       border: 1px solid #dbe4f0;
       border-radius: 7px;
       color: #123b8a;
       background: #ffffff;
-=======
-      border: 1px solid #aebbb1;
-      border-radius: 4px;
-      color: #34443a;
-      background: #fff;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       text-decoration: none;
       font-weight: 600;
     }
 
     .table-wrap {
       overflow-x: auto;
-<<<<<<< HEAD
       border: 1px solid #dbe4f0;
       border-radius: 14px;
       background: #ffffff;
       box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
-=======
-      border-top: 1px solid #d9e0da;
-      border-bottom: 1px solid #d9e0da;
-      background: #fff;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     table {
@@ -210,20 +166,12 @@ import { ProveedorService } from '../services/proveedor.service';
     th,
     td {
       padding: 14px 16px;
-<<<<<<< HEAD
       border-bottom: 1px solid #dbe4f0;
-=======
-      border-bottom: 1px solid #e6ebe6;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       white-space: nowrap;
     }
 
     th {
-<<<<<<< HEAD
       color: #52637a;
-=======
-      color: #536258;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -239,22 +187,14 @@ import { ProveedorService } from '../services/proveedor.service';
     .actions button {
       padding: 0;
       border: 0;
-<<<<<<< HEAD
       color: #1d4ed8;
-=======
-      color: #286744;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       background: transparent;
       font: inherit;
       cursor: pointer;
     }
 
     .actions button {
-<<<<<<< HEAD
       color: #a23b2b;
-=======
-      color: #a33d35;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .actions button:disabled {
@@ -264,29 +204,17 @@ import { ProveedorService } from '../services/proveedor.service';
 
     a:focus-visible,
     button:focus-visible {
-<<<<<<< HEAD
       outline: 3px solid #1d4ed8;
-=======
-      outline: 3px solid #d18b2c;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       outline-offset: 3px;
     }
 
     .message {
       padding: 20px 0;
-<<<<<<< HEAD
       color: #52637a;
     }
 
     .message-error {
       color: #a23b2b;
-=======
-      color: #536258;
-    }
-
-    .message-error {
-      color: #a33d35;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     @media (max-width: 640px) {

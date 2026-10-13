@@ -2,10 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Proveedor } from '../models/proveedor.model';
-<<<<<<< HEAD
 import { environment } from '../../environments/environment';
-=======
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
 
 
 
@@ -39,20 +36,13 @@ export class ProveedorService {
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Proveedor } from '../models/proveedor.model';
-<<<<<<< HEAD
 import { environment } from '../../environments/environment';
-=======
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorService {
-<<<<<<< HEAD
   private readonly apiUrl = `${environment.apiUrl}/api/proveedores`;
-=======
-  private readonly apiUrl = 'http://localhost:8080/api/proveedores';
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
   private readonly http = inject(HttpClient);
 
   listar(): Observable<Proveedor[]> {

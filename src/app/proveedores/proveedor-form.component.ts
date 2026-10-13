@@ -99,24 +99,15 @@ import { ProveedorService } from '../services/proveedor.service';
     :host {
       display: block;
       min-height: 100vh;
-<<<<<<< HEAD
       color: #172b4d;
       background: #f4f7fb;
-=======
-      color: #202a24;
-      background: #f5f7f4;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-family: "Segoe UI", sans-serif;
     }
 
     .page {
       width: min(760px, calc(100% - 40px));
       margin: 0 auto;
-<<<<<<< HEAD
       padding: 56px 0 72px;
-=======
-      padding: 48px 0;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .page-header {
@@ -129,11 +120,7 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .eyebrow {
       margin: 0 0 8px;
-<<<<<<< HEAD
       color: #1d4ed8;
-=======
-      color: #467458;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -141,47 +128,28 @@ import { ProveedorService } from '../services/proveedor.service';
 
     h1 {
       margin: 0;
-<<<<<<< HEAD
       font-size: clamp(28px, 4vw, 36px);
-=======
-      font-size: 30px;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-weight: 650;
     }
 
     .back-link {
-<<<<<<< HEAD
       color: #1d4ed8;
-=======
-      color: #286744;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-weight: 600;
       text-decoration: none;
     }
 
     form {
-<<<<<<< HEAD
       padding: 30px;
       border: 1px solid #dbe4f0;
       border-radius: 14px;
       background: #ffffff;
       box-shadow: 0 10px 30px rgb(30 64 175 / 6%);
-=======
-      padding: 24px;
-      border: 1px solid #d9e0da;
-      border-radius: 4px;
-      background: #fff;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-<<<<<<< HEAD
       gap: 22px;
-=======
-      gap: 20px;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .field {
@@ -204,46 +172,27 @@ import { ProveedorService } from '../services/proveedor.service';
       width: 100%;
       min-height: 42px;
       padding: 9px 11px;
-<<<<<<< HEAD
       border: 1px solid #c5d0df;
       border-radius: 6px;
       color: #172b4d;
       background: #ffffff;
-=======
-      border: 1px solid #aebbb1;
-      border-radius: 3px;
-      color: #202a24;
-      background: #fff;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font: inherit;
     }
 
     input:focus-visible,
     a:focus-visible,
     button:focus-visible {
-<<<<<<< HEAD
       outline: 3px solid #1d4ed8;
-=======
-      outline: 3px solid #d18b2c;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       outline-offset: 2px;
     }
 
     input[aria-invalid="true"] {
-<<<<<<< HEAD
       border-color: #a23b2b;
-=======
-      border-color: #a33d35;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .field-error {
       margin: 0;
-<<<<<<< HEAD
       color: #a23b2b;
-=======
-      color: #a33d35;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font-size: 13px;
     }
 
@@ -253,11 +202,7 @@ import { ProveedorService } from '../services/proveedor.service';
       gap: 12px;
       margin-top: 28px;
       padding-top: 20px;
-<<<<<<< HEAD
       border-top: 1px solid #dbe4f0;
-=======
-      border-top: 1px solid #e6ebe6;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .button {
@@ -267,11 +212,7 @@ import { ProveedorService } from '../services/proveedor.service';
       min-height: 42px;
       padding: 0 16px;
       border: 1px solid transparent;
-<<<<<<< HEAD
       border-radius: 7px;
-=======
-      border-radius: 4px;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       font: inherit;
       font-weight: 600;
       text-decoration: none;
@@ -280,19 +221,11 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .button-primary {
       color: #fff;
-<<<<<<< HEAD
       background: #1d4ed8;
     }
 
     .button-primary:hover:not(:disabled) {
       background: #1e40af;
-=======
-      background: #286744;
-    }
-
-    .button-primary:hover:not(:disabled) {
-      background: #1d5235;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     .button-primary:disabled {
@@ -301,7 +234,6 @@ import { ProveedorService } from '../services/proveedor.service';
     }
 
     .button-secondary {
-<<<<<<< HEAD
       border-color: #dbe4f0;
       color: #123b8a;
       background: #ffffff;
@@ -313,19 +245,6 @@ import { ProveedorService } from '../services/proveedor.service';
 
     .message-error {
       color: #a23b2b;
-=======
-      border-color: #aebbb1;
-      color: #34443a;
-      background: #fff;
-    }
-
-    .message {
-      color: #536258;
-    }
-
-    .message-error {
-      color: #a33d35;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
     }
 
     @media (max-width: 600px) {
@@ -344,11 +263,7 @@ import { ProveedorService } from '../services/proveedor.service';
       }
 
       form {
-<<<<<<< HEAD
         padding: 20px;
-=======
-        padding: 18px;
->>>>>>> 1d1300cc24a4bce5b1bcd5e1454c87a2734d4f2e
       }
 
       .form-grid {
