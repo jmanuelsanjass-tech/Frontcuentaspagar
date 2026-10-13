@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
 /dist
 /tmp
@@ -20,20 +17,12 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-
-
-
-# Visual Studio Code
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
-.history/*
 
-# Miscellaneous
+# Angular
 /.angular/cache
+/.angular/
 .sass-cache/
 /connect.lock
 /coverage
@@ -42,67 +31,19 @@ testem.log
 /typings
 __screenshots__/
 
+# Environment
+/.env
+.env.local
+
+# Firebase
+.firebase/
+
+# Backups
+.git-monorepo-backup/
+
 # System files
 .DS_Store
 Thumbs.db
-=======
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
-
-# Node modules and dependency files
-/node_modules/
-/yarn.lock
-
-# Environment files
-/.env
-
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Backups
-.git-monorepo-backup/
-
-# Firebase
-.firebase/
-
-# VSCode (excepto extensiones recomendadas)
-.vscode/launch.json
-.vscode/tasks.json
-.vscode/mcp.json
-.vscode/*.code-workspace
-
-# Archivos basura
-*.swp
-*.swo
-*~
-# Backups
-.git-monorepo-backup/
-
-# Firebase
-.firebase/
-
-# VSCode personales
-.vscode/launch.json
-.vscode/tasks.json
-.vscode/mcp.json
-.vscode/*.code-workspace
-
-# Basura
 *.swp
 *.swo
 *~
