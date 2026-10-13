@@ -26,17 +26,11 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Run tests
         run: npm run test -- --watch=false
         continue-on-error: true
-
-      - name: Set deployment version
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: node -e "require('node:fs').writeFileSync('src/environments/deployment-version.ts', 'export const deploymentVersion = ' + JSON.stringify(process.env.DEPLOY_VERSION) + ';\\n')"
-        env:
-          DEPLOY_VERSION: ${{ github.run_number }}
 
       - name: Build Angular app
         run: npm run build -- --configuration production
@@ -51,7 +45,7 @@ jobs:
           path: dist/cuentaspagar/browser
           retention-days: 7
 
-  deploy:
+  deploy-pages:
     name: Deploy to GitHub Pages
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -76,8 +70,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/cuentaspagar/browser
           publish_branch: gh-pages
-          
-    deploy-firebase:
+
+  deploy-firebase:
     name: Deploy to Firebase Hosting
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
