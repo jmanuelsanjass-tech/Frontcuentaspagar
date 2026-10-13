@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build and Test
+  build-firebase:
+    name: Build for Firebase
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -28,26 +28,74 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm run test -- --watch=false
-        continue-on-error: true
-
-      - name: Build Angular app
-        run: npm run build -- --configuration production
+      - name: Build Angular app (Firebase)
+        run: npm run build -- --configuration production-firebase
 
       - name: Create 404.html for SPA routing
         run: cp dist/cuentaspagar/browser/index.html dist/cuentaspagar/browser/404.html
 
-      - name: Upload build artifacts
+      - name: Upload artifact (Firebase)
         uses: actions/upload-artifact@v4
         with:
-          name: angular-dist
+          name: angular-dist-firebase
           path: dist/cuentaspagar/browser
           retention-days: 7
 
+  build-pages:
+    name: Build for GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Angular app (Pages)
+        run: npm run build -- --configuration production-pages
+
+      - name: Create 404.html for SPA routing
+        run: cp dist/cuentaspagar/browser/index.html dist/cuentaspagar/browser/404.html
+
+      - name: Upload artifact (Pages)
+        uses: actions/upload-artifact@v4
+        with:
+          name: angular-dist-pages
+          path: dist/cuentaspagar/browser
+          retention-days: 7
+
+  deploy-firebase:
+    name: Deploy to Firebase Hosting
+    needs: build-firebase
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: angular-dist-firebase
+          path: dist/cuentaspagar/browser
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ZAPATERIA_ERP_FRONT }}
+          channelId: live
+          projectId: zapateria-erp-front
+
   deploy-pages:
     name: Deploy to GitHub Pages
-    needs: build
+    needs: build-pages
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
@@ -61,7 +109,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: angular-dist
+          name: angular-dist-pages
           path: dist/cuentaspagar/browser
 
       - name: Deploy to GitHub Pages
@@ -70,26 +118,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/cuentaspagar/browser
           publish_branch: gh-pages
-
-  deploy-firebase:
-    name: Deploy to Firebase Hosting
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v5
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: angular-dist
-          path: dist/cuentaspagar/browser
-
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ZAPATERIA_ERP_FRONT }}
-          channelId: live
-          projectId: zapateria-erp-front

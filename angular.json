@@ -10,7 +10,7 @@
     "cuentaspagar": {
       "projectType": "application",
       "schematics": {},
-      "root": "",	
+      "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -20,7 +20,6 @@
             "outputPath": "dist/cuentaspagar",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "baseHref": "/Frontcuentaspagar/",
             "assets": [
               {
                 "glob": "**/*",
@@ -29,7 +28,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
+            ]
           },
           "configurations": {
             "production": {
@@ -52,6 +51,50 @@
                 }
               ],
               "outputHashing": "all"
+            },
+            "production-firebase": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all",
+              "baseHref": "/"
+            },
+            "production-pages": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all",
+              "baseHref": "/Frontcuentaspagar/"
             },
             "development": {
               "optimization": false,
