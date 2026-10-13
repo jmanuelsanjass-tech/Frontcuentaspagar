@@ -32,6 +32,12 @@ jobs:
         run: npm run test -- --watch=false
         continue-on-error: true
 
+      - name: Set deployment version
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: node -e "require('node:fs').writeFileSync('src/environments/deployment-version.ts', 'export const deploymentVersion = ' + JSON.stringify(process.env.DEPLOY_VERSION) + ';\\n')"
+        env:
+          DEPLOY_VERSION: ${{ github.run_number }}
+
       - name: Build Angular app
         run: npm run build -- --configuration production
 

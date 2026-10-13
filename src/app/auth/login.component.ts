@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { deploymentVersion } from '../../environments/deployment-version';
 
 @Component({
   selector: 'app-login',
@@ -69,7 +70,12 @@ import { AuthService } from '../services/auth.service';
             {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
           </button>
         </form>
-        <p class="register-link">¿No tienes una cuenta? <a routerLink="/register">Regístrate</a></p>
+        <div class="register-footer">
+          <p class="register-link">
+            ¿No tienes una cuenta? <a routerLink="/register">Regístrate</a>
+          </p>
+          <span class="version-badge">Version {{ deploymentVersion }}</span>
+        </div>
       </section>
     </main>
   `,
@@ -234,20 +240,39 @@ import { AuthService } from '../services/auth.service';
       opacity: 0.65;
     }
 
+    .register-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 12px;
+      margin-top: 22px;
+    }
+
     .register-link {
-      margin: 22px 0 0;
+      margin: 0;
       color: #52637a;
       font-size: 14px;
-      text-align: center;
     }
 
     .register-link a {
       color: #1d4ed8;
       font-weight: 650;
     }
+
+    .version-badge {
+      padding: 4px 8px;
+      border: 1px solid #c5d0df;
+      border-radius: 999px;
+      color: #52637a;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
   `,
 })
 export class LoginComponent {
+  protected readonly deploymentVersion = deploymentVersion;
   private readonly formBuilder = inject(FormBuilder);
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
