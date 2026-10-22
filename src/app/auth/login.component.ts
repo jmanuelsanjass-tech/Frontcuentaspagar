@@ -14,15 +14,15 @@ import { deploymentVersion } from '../../environments/deployment-version';
       <section class="login-card" aria-labelledby="login-title">
         <div class="login-card-header">
           <a class="brand" routerLink="/" aria-label="Volver al menú principal">
-            <span class="brand-mark" aria-hidden="true">ERP</span>
-            <span>Zapaterías León</span>
+            <span class="brand-mark" aria-hidden="true">PDV</span>
+            <span>Tienda</span>
           </a>
           <img
             class="erp-illustration"
             ngSrc="/erp-dashboard.svg"
             width="120"
             height="88"
-            alt="Ilustración de un panel de gestión ERP"
+            alt=""
             priority
           />
         </div>

@@ -7,15 +7,15 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   template: `
     <header class="app-header">
-      <a class="brand" routerLink="/" aria-label="Zapaterías León, menú principal">
-        <span class="brand-mark" aria-hidden="true">ERP</span>
-        <span>Zapaterías León</span>
+      <a class="brand" routerLink="/" aria-label="Menú principal">
+        <span class="brand-mark" aria-hidden="true">PDV</span>
+        <span>Punto de Venta</span>
       </a>
       <nav class="main-nav" aria-label="Menú principal">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
         <a routerLink="/proveedores" routerLinkActive="active">Proveedores</a>
         <a routerLink="/ventas" routerLinkActive="active">Ventas</a>
-        <a routerLink="/productos" routerLinkActive="active">Productos</a>
+        <a routerLink="/productos" routerLinkActive="active">Inventario</a>
         <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
         @if (auth.isLoggedIn()) {
           <button class="nav-action" type="button" [disabled]="cerrandoSesion()" (click)="salir()">

@@ -7,9 +7,9 @@ import { RouterLink } from '@angular/router';
   template: `
     <main class="dashboard">
       <section class="welcome" aria-labelledby="welcome-title">
-        <p class="eyebrow">Panel de control</p>
+        <p class="eyebrow"></p>
         <h1 id="welcome-title">Menú principal</h1>
-        <p class="welcome-copy">Accede rápidamente a los módulos de tu negocio.</p>
+        <p class="welcome-copy">Accede rápidamente.</p>
       </section>
 
       <section class="module-grid" aria-label="Módulos disponibles">
@@ -27,9 +27,9 @@ import { RouterLink } from '@angular/router';
         </a>
         <a class="module-card" routerLink="/productos">
           <span class="module-icon products-icon" aria-hidden="true">PR</span>
-          <span class="module-title">Productos</span>
+          <span class="module-title">Inventario</span>
           <span class="module-description">Consulta y administra el inventario de productos.</span>
-          <span class="module-action">Ir a productos <span aria-hidden="true">→</span></span>
+          <span class="module-action">Ir a Inventario <span aria-hidden="true">→</span></span>
         </a>
         <a class="module-card" routerLink="/clientes">
           <span class="module-icon customers-icon" aria-hidden="true">CL</span>

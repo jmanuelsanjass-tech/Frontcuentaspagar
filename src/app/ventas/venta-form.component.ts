@@ -1,5 +1,6 @@
 import { Component, computed, inject, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -9,38 +10,93 @@ import { RouterLink } from '@angular/router';
   template: `
     <main class="page">
       <header class="page-header">
-        <div> 
+        <div>
           <p class="eyebrow">Comercial</p>
           <h1>Ventas</h1>
+          <p class="page-description">Captura la venta y sus productos con los datos de las entidades.</p>
         </div>
         <div class="header-tools">
           <div class="field header-date">
-            <label for="fechaVenta">Fecha de venta <span aria-hidden="true">*</span></label>
-            <input id="fechaVenta" type="date" [formControl]="form.controls.fechaVenta" required />
+            <label for="fechaVenta">Fecha y hora de venta <span aria-hidden="true">*</span></label>
+            <input id="fechaVenta" type="datetime-local" [formControl]="form.controls.fechaVenta" required />
           </div>
-          <a routerLink="/proveedores" class="back-link">Volver a proveedores</a>
+          <a routerLink="/clientes" class="back-link">Consultar clientes</a>
         </div>
       </header>
 
       <form [formGroup]="form" (ngSubmit)="registrar()" novalidate>
+        <section class="section" aria-labelledby="venta-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Entidad principal</p>
+              <h2 id="venta-heading">Datos de la venta</h2>
+            </div>
+          </div>
+
+          <div class="sale-fields">
+            <div class="field">
+              <label for="idCliente">ID del cliente <span aria-hidden="true">*</span></label>
+              <input id="idCliente" type="number" min="1" step="1" formControlName="idCliente"
+                placeholder="ID registrado en Clientes" required />
+            </div>
+            <div class="field">
+              <label for="estado">Estado <span aria-hidden="true">*</span></label>
+              <select id="estado" formControlName="estado" required>
+                <option value="completada">Completada</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="cancelada">Cancelada</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="descuentoVenta">Descuento de la venta</label>
+              <input id="descuentoVenta" type="number" formControlName="descuento" min="0" step="0.01" />
+            </div>
+            <div class="field">
+              <label for="usuarioAuditoria">Usuario de auditoría</label>
+              <input id="usuarioAuditoria" formControlName="usuarioAuditoria" maxlength="50"
+                placeholder="Usuario responsable (opcional)" />
+            </div>
+          </div>
+          <p class="field-hint">El ID de venta y la fecha de auditoría son automáticos. El QR es opcional.</p>
+        </section>
+
         <section class="section" aria-labelledby="productos-heading">
           <div class="section-heading">
             <div>
-              <p class="section-kicker">Detalle</p>
-              <h2 id="productos-heading">Identifica Productos</h2>
+              <p class="section-kicker">Entidad relacionada</p>
+              <h2 id="productos-heading">Detalle de venta</h2>
             </div>
             <span class="item-count">{{ lineas().length }} productos</span>
           </div>
 
           <div class="product-fields">
             <div class="field">
-              <label for="codigoBarras">Búsqueda por código de barras</label>
-              <input id="codigoBarras" formControlName="codigoBarras"
-                placeholder="Escanea o escribe el código" autocomplete="off" />
+              <label for="idProducto">ID del producto <span aria-hidden="true">*</span></label>
+              <input id="idProducto" type="number" min="1" step="1" formControlName="idProducto"
+                placeholder="ID registrado en Inventario" required />
             </div>
             <div class="field">
-              <label for="descripcion">Búsqueda por descripción</label>
-              <input id="descripcion" formControlName="descripcion" placeholder="Descripción del producto" />
+              <label for="codigoBarras">Código de barras</label>
+              <input id="codigoBarras" formControlName="codigoBarras"
+                placeholder="Código para identificar el producto" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="descripcion">Descripción del producto</label>
+              <input id="descripcion" formControlName="descripcion" placeholder="Referencia visual del producto" />
+            </div>
+            <div class="field">
+              <label for="precioUnitario">Precio unitario <span aria-hidden="true">*</span></label>
+              <input id="precioUnitario" type="number" min="0.01" step="0.01"
+                formControlName="precioUnitario" required />
+            </div>
+            <div class="field">
+              <label for="cantidad">Cantidad <span aria-hidden="true">*</span></label>
+              <input id="cantidad" type="number" min="1" step="1" formControlName="cantidad" required />
+            </div>
+            <div class="field">
+              <label for="descuentoDetalle">Descuento del producto</label>
+              <input id="descuentoDetalle" type="number" min="0" step="0.01"
+                formControlName="descuentoDetalle" />
             </div>
           </div>
 
@@ -48,86 +104,71 @@ import { RouterLink } from '@angular/router';
             <table>
               <thead>
                 <tr>
-                  <th scope="col">Código Barras</th>
-                  <th scope="col">Descripción Productos</th>
-                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">ID producto</th>
+                  <th scope="col">Producto</th>
                   <th scope="col">Cantidad</th>
+                  <th scope="col">Precio unitario</th>
+                  <th scope="col">Subtotal</th>
+                  <th scope="col">Descuento</th>
+                  <th scope="col">IVA (16%)</th>
+                  <th scope="col">Total</th>
+                  <th scope="col"><span class="visually-hidden">Acciones</span></th>
                 </tr>
               </thead>
               <tbody>
                 @for (linea of lineas(); track $index) {
                   <tr>
-                    <td>{{ linea.codigoBarras }}</td>
-                    <td>{{ linea.descripcion }}</td>
-                    <td class="numeric">
-                      <input class="table-input" type="number" min="0.01" step="0.01"
-                        [value]="linea.precioUnitario || ''"
-                        [attr.aria-label]="'Precio unitario de ' + linea.descripcion"
-                        (input)="actualizarLinea($index, 'precioUnitario', $event)" />
-                    </td>
-                    <td class="numeric">
-                      <input class="table-input" type="number" min="0.01" step="any"
-                        [value]="linea.cantidad"
-                        [attr.aria-label]="'Cantidad de ' + linea.descripcion"
-                        (input)="actualizarLinea($index, 'cantidad', $event)" />
+                    <td>{{ linea.id_producto }}</td>
+                    <td>{{ linea.descripcion || linea.codigoBarras || 'Producto' }}</td>
+                    <td class="numeric">{{ linea.cantidad }}</td>
+                    <td class="numeric">{{ formatoMoneda(linea.precio_unitario) }}</td>
+                    <td class="numeric">{{ formatoMoneda(subtotalLinea(linea)) }}</td>
+                    <td class="numeric">{{ formatoMoneda(linea.descuento) }}</td>
+                    <td class="numeric">{{ formatoMoneda(ivaLinea(linea)) }}</td>
+                    <td class="numeric">{{ formatoMoneda(totalLinea(linea)) }}</td>
+                    <td>
+                      <button type="button" class="remove-button"
+                        [attr.aria-label]="'Quitar producto ' + linea.id_producto"
+                        (click)="quitarProducto($index)">Quitar</button>
                     </td>
                   </tr>
                 } @empty {
                   <tr>
-                    <td class="empty-row" colspan="4">Aún no hay productos agregados.</td>
+                    <td class="empty-row" colspan="9">Aún no hay productos agregados.</td>
                   </tr>
                 }
               </tbody>
             </table>
           </div>
           <div class="section-actions">
-            <button type="button" class="button button-primary" (click)="agregarProducto()">Agregar</button>
+            <button type="button" class="button button-primary" (click)="agregarProducto()">Agregar producto</button>
           </div>
         </section>
 
-        <section class="section sale-section" aria-labelledby="venta-heading">
+        <section class="section sale-section" aria-labelledby="resumen-heading">
           <div class="section-heading">
             <div>
-              <p class="section-kicker">Cobro</p>
-              <h2 id="venta-heading">Venta</h2>
+              <p class="section-kicker">Importes calculados</p>
+              <h2 id="resumen-heading">Resumen de venta</h2>
             </div>
           </div>
 
           <div class="sale-fields">
             <div class="field">
               <label for="subtotal">Subtotal</label>
-              <input id="subtotal" [value]="subtotal().toFixed(2)" readonly />
+              <input id="subtotal" [value]="formatoMoneda(subtotal())" readonly />
             </div>
             <div class="field">
               <label for="iva">IVA (16%)</label>
-              <input id="iva" [value]="iva().toFixed(2)" readonly />
+              <input id="iva" [value]="formatoMoneda(iva())" readonly />
             </div>
             <div class="field">
-              <label for="descuento">Descuento</label>
-              <input id="descuento" type="number" formControlName="descuento" min="0" step="0.01" />
+              <label for="descuentoResumen">Descuento total</label>
+              <input id="descuentoResumen" [value]="formatoMoneda(descuentoTotal())" readonly />
             </div>
             <div class="field total-field">
               <label for="totalVenta">Total Venta</label>
-              <input id="totalVenta" [value]="totalVenta().toFixed(2)" readonly />
-            </div>
-            <div class="field">
-              <label for="estatus">Estatus <span aria-hidden="true">*</span></label>
-              <select id="estatus" formControlName="estatus" required>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Pagada">Pagada</option>
-                <option value="Anulada">Anulada</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="formaPago">Forma de pago <span aria-hidden="true">*</span></label>
-              <select id="formaPago" formControlName="formaPago" required>
-                <option value="" disabled>Selecciona una forma de pago</option>
-                <option value="Efectivo">Efectivo</option>
-                <option value="Tarjeta">Tarjeta</option>
-                <option value="Transferencia">Transferencia</option>
-                <option value="Crédito">Crédito</option>
-                <option value="Otro">Otro</option>
-              </select>
+              <input id="totalVenta" [value]="formatoMoneda(totalVenta())" readonly />
             </div>
           </div>
         </section>
@@ -153,7 +194,7 @@ import { RouterLink } from '@angular/router';
     }
 
     .page {
-      width: min(900px, calc(100% - 40px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
       padding: 56px 0 72px;
     }
@@ -173,7 +214,7 @@ import { RouterLink } from '@angular/router';
     }
 
     .header-date {
-      width: 230px;
+      width: 270px;
     }
 
     .eyebrow {
@@ -194,6 +235,20 @@ import { RouterLink } from '@angular/router';
       color: #1d4ed8;
       font-weight: 600;
       text-decoration: none;
+    }
+
+    .page-description,
+    .field-hint {
+      color: #52637a;
+      font-size: 14px;
+    }
+
+    .page-description {
+      margin: 10px 0 0;
+    }
+
+    .field-hint {
+      margin: 14px 0 0;
     }
 
     form {
@@ -247,8 +302,7 @@ import { RouterLink } from '@angular/router';
     }
 
     .product-fields {
-      grid-template-columns: repeat(2, minmax(0, 360px));
-      justify-content: center;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .sale-fields {
@@ -267,6 +321,7 @@ import { RouterLink } from '@angular/router';
       width: 100%;
       border-collapse: collapse;
       text-align: left;
+      white-space: nowrap;
     }
 
     th,
@@ -274,12 +329,6 @@ import { RouterLink } from '@angular/router';
       padding: 12px 14px;
       border-bottom: 1px solid #dbe4f0;
       font-size: 14px;
-    }
-
-    .table-input {
-      width: 112px;
-      min-height: 36px;
-      padding: 6px 8px;
     }
 
     th {
@@ -296,6 +345,35 @@ import { RouterLink } from '@angular/router';
     .numeric {
       text-align: right;
       white-space: nowrap;
+    }
+
+    .remove-button {
+      border: 0;
+      padding: 6px;
+      color: #a23b2b;
+      background: transparent;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .remove-button:hover {
+      text-decoration: underline;
+    }
+
+    .remove-button:focus-visible {
+      outline: 3px solid #1d4ed8;
+      outline-offset: 2px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
     }
 
     .empty-row {
@@ -448,23 +526,37 @@ export class VentaFormComponent {
   private readonly platformId = inject(PLATFORM_ID);
   readonly mensaje = signal('');
   readonly lineas = signal<DetalleVenta[]>([]);
-  readonly subtotal = computed(() => this.lineas().reduce(
-    (suma, linea) => suma + linea.precioUnitario * linea.cantidad,
-    0
-  ));
-  readonly iva = computed(() => this.subtotal() * 0.16);
-  readonly totalVenta = computed(() => Math.max(
-    0,
-    this.subtotal() + this.iva() - this.form.controls.descuento.value
-  ));
   readonly form = this.formBuilder.nonNullable.group({
-    fechaVenta: [this.fechaActual(), Validators.required],
+    fechaVenta: [this.fechaHoraActual(), Validators.required],
+    idCliente: [0, [Validators.required, Validators.min(1)]],
     codigoBarras: [''],
     descripcion: [''],
+    idProducto: [0],
+    precioUnitario: [0],
+    cantidad: [1],
+    descuentoDetalle: [0],
     descuento: [0, [Validators.required, Validators.min(0)]],
-    estatus: ['Pendiente', Validators.required],
-    formaPago: ['', Validators.required]
+    estado: ['completada', Validators.required],
+    usuarioAuditoria: ['', Validators.maxLength(50)]
   });
+  private readonly descuentoVenta = toSignal(this.form.controls.descuento.valueChanges, {
+    initialValue: this.form.controls.descuento.value,
+  });
+  readonly subtotal = computed(() => this.redondear(this.lineas().reduce(
+    (suma, linea) => suma + this.subtotalLinea(linea),
+    0,
+  )));
+  readonly descuentoTotal = computed(() => this.redondear(
+    this.lineas().reduce((suma, linea) => suma + linea.descuento, 0) +
+      Number(this.descuentoVenta()),
+  ));
+  readonly iva = computed(() => this.redondear(
+    this.lineas().reduce((suma, linea) => suma + this.ivaLinea(linea), 0) -
+      Number(this.descuentoVenta()) * 0.16,
+  ));
+  readonly totalVenta = computed(() => this.redondear(
+    this.subtotal() - this.descuentoTotal() + this.iva(),
+  ));
 
   registrar(): void {
     this.mensaje.set('');
@@ -474,8 +566,30 @@ export class VentaFormComponent {
       return;
     }
 
-    if (this.lineas().some(linea => linea.precioUnitario <= 0 || linea.cantidad <= 0)) {
+    if (!Number.isSafeInteger(Number(this.form.controls.idCliente.value)) ||
+      Number(this.form.controls.idCliente.value) <= 0) {
+      this.mensaje.set('Ingresa un ID de cliente entero y válido registrado en Clientes.');
+      return;
+    }
+
+    if (this.lineas().some(linea => linea.precio_unitario <= 0 || linea.cantidad <= 0)) {
       this.mensaje.set('Completa un precio unitario y una cantidad válidos en cada producto.');
+      return;
+    }
+
+    if (this.lineas().some(linea => !Number.isInteger(linea.cantidad))) {
+      this.mensaje.set('La cantidad de cada producto debe ser un número entero.');
+      return;
+    }
+
+    if (this.lineas().some(linea => linea.descuento < 0 || linea.descuento > this.subtotalLinea(linea))) {
+      this.mensaje.set('El descuento de cada producto debe estar entre cero y su subtotal.');
+      return;
+    }
+
+    if (Number(this.form.controls.descuento.value) > this.subtotal() -
+      this.lineas().reduce((suma, linea) => suma + linea.descuento, 0)) {
+      this.mensaje.set('El descuento de la venta no puede superar el subtotal restante.');
       return;
     }
 
@@ -491,15 +605,20 @@ export class VentaFormComponent {
 
     const valores = this.form.getRawValue();
     const venta: VentaGuardada = {
-      fechaVenta: valores.fechaVenta,
-      productos: this.lineas(),
+      id_cliente: Number(valores.idCliente),
+      fecha_venta: new Date(valores.fechaVenta).toISOString(),
       subtotal: this.subtotal(),
       iva: this.iva(),
-      descuento: valores.descuento,
+      descuento: this.descuentoTotal(),
       total: this.totalVenta(),
-      estatus: valores.estatus,
-      formaPago: valores.formaPago,
-      guardadaEn: new Date().toISOString()
+      estado: valores.estado,
+      usuario_auditoria: valores.usuarioAuditoria.trim() || null,
+      detalle_venta: this.lineas().map(linea => ({
+        id_producto: linea.id_producto,
+        cantidad: linea.cantidad,
+        precio_unitario: linea.precio_unitario,
+        descuento: linea.descuento,
+      })),
     };
 
     try {
@@ -513,31 +632,62 @@ export class VentaFormComponent {
   }
 
   agregarProducto(): void {
-    const { codigoBarras, descripcion } = this.form.getRawValue();
-    if (!codigoBarras.trim() || !descripcion.trim()) {
-      this.mensaje.set('Completa el código de barras y la descripción del producto.');
+    const valores = this.form.getRawValue();
+    if (!Number.isSafeInteger(Number(valores.idProducto)) || Number(valores.idProducto) <= 0) {
+      this.mensaje.set('Ingresa un ID de producto válido registrado en Inventario.');
+      return;
+    }
+
+    if (!Number.isInteger(Number(valores.cantidad)) || Number(valores.cantidad) <= 0) {
+      this.mensaje.set('La cantidad debe ser un número entero mayor que cero.');
+      return;
+    }
+
+    if (Number(valores.precioUnitario) <= 0) {
+      this.mensaje.set('Ingresa un precio unitario mayor que cero.');
+      return;
+    }
+
+    const descuento = Number(valores.descuentoDetalle);
+    const subtotal = Number(valores.precioUnitario) * Number(valores.cantidad);
+    if (descuento < 0 || descuento > subtotal) {
+      this.mensaje.set('El descuento del producto no puede superar su subtotal.');
       return;
     }
 
     this.lineas.update(lineas => [...lineas, {
-      codigoBarras: codigoBarras.trim(),
-      descripcion: descripcion.trim(),
-      precioUnitario: 0,
-      cantidad: 1
+      id_producto: Number(valores.idProducto),
+      codigoBarras: valores.codigoBarras.trim(),
+      descripcion: valores.descripcion.trim(),
+      precio_unitario: Number(valores.precioUnitario),
+      cantidad: Number(valores.cantidad),
+      descuento,
     }]);
-    this.form.patchValue({ codigoBarras: '', descripcion: '' });
+    this.form.patchValue({
+      idProducto: 0,
+      codigoBarras: '',
+      descripcion: '',
+      precioUnitario: 0,
+      cantidad: 1,
+      descuentoDetalle: 0,
+    });
     this.mensaje.set('Producto agregado a la venta.');
   }
 
-  actualizarLinea(indice: number, campo: 'precioUnitario' | 'cantidad', evento: Event): void {
-    const valor = Number((evento.target as HTMLInputElement).value);
-    if (!Number.isFinite(valor) || valor < 0) {
-      return;
-    }
+  subtotalLinea(linea: DetalleVenta): number {
+    return this.redondear(linea.precio_unitario * linea.cantidad);
+  }
 
-    this.lineas.update(lineas => lineas.map((linea, posicion) =>
-      posicion === indice ? { ...linea, [campo]: valor } : linea
-    ));
+  ivaLinea(linea: DetalleVenta): number {
+    return this.redondear((this.subtotalLinea(linea) - linea.descuento) * 0.16);
+  }
+
+  totalLinea(linea: DetalleVenta): number {
+    return this.redondear(this.subtotalLinea(linea) - linea.descuento + this.ivaLinea(linea));
+  }
+
+  quitarProducto(indice: number): void {
+    this.lineas.update(lineas => lineas.filter((_, posicion) => posicion !== indice));
   }
 
   formatoMoneda(valor: number): string {
@@ -546,40 +696,50 @@ export class VentaFormComponent {
 
   limpiar(): void {
     this.form.reset({
-      fechaVenta: this.fechaActual(),
+      fechaVenta: this.fechaHoraActual(),
+      idCliente: 0,
       codigoBarras: '',
       descripcion: '',
+      idProducto: 0,
+      precioUnitario: 0,
+      cantidad: 1,
+      descuentoDetalle: 0,
       descuento: 0,
-      estatus: 'Pendiente',
-      formaPago: ''
+      estado: 'completada',
+      usuarioAuditoria: ''
     });
     this.lineas.set([]);
     this.mensaje.set('');
   }
 
-  private fechaActual(): string {
+  private redondear(valor: number): number {
+    return Math.round((valor + Number.EPSILON) * 100) / 100;
+  }
+
+  private fechaHoraActual(): string {
     const fecha = new Date();
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const dia = String(fecha.getDate()).padStart(2, '0');
-    return `${fecha.getFullYear()}-${mes}-${dia}`;
+    const desfase = fecha.getTimezoneOffset() * 60_000;
+    return new Date(fecha.getTime() - desfase).toISOString().slice(0, 16);
   }
 }
 
 interface DetalleVenta {
+  id_producto: number;
   codigoBarras: string;
   descripcion: string;
-  precioUnitario: number;
+  precio_unitario: number;
   cantidad: number;
+  descuento: number;
 }
 
 interface VentaGuardada {
-  fechaVenta: string;
-  productos: DetalleVenta[];
+  id_cliente: number;
+  fecha_venta: string;
   subtotal: number;
   iva: number;
   descuento: number;
   total: number;
-  estatus: string;
-  formaPago: string;
-  guardadaEn: string;
+  estado: string;
+  usuario_auditoria: string | null;
+  detalle_venta: Pick<DetalleVenta, 'id_producto' | 'cantidad' | 'precio_unitario' | 'descuento'>[];
 }
