@@ -5,6 +5,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { deploymentVersion } from '../../environments/deployment-version';
+imports: [NgOptimizedImage, ReactiveFormsModule, RouterLink];
+
 
 @Component({
   selector: 'app-login',
@@ -19,12 +21,12 @@ import { deploymentVersion } from '../../environments/deployment-version';
           </a>
           <img
             class="erp-illustration"
-            ngSrc="/erp-dashboard.svg"
+            ngSrc="assets/menu.png"
             width="120"
             height="88"
-            alt=""
-            priority
+            alt="Menú ERP"
           />
+
         </div>
         <p class="eyebrow">Acceso al sistema</p>
         <h1 id="login-title">Iniciar sesión</h1>
@@ -84,7 +86,7 @@ import { deploymentVersion } from '../../environments/deployment-version';
       display: block;
       min-height: calc(100vh - 76px);
       color: #172b4d;
-      background: #f4f7fb;
+      background: #cbd0db;
       font-family: "Segoe UI", sans-serif;
     }
 
@@ -101,7 +103,7 @@ import { deploymentVersion } from '../../environments/deployment-version';
       padding: 32px;
       border: 1px solid #dbe4f0;
       border-radius: 14px;
-      background: #ffffff;
+      background: #f5f2f2;
       box-shadow: 0 16px 40px rgb(30 64 175 / 10%);
     }
 
