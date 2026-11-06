@@ -13,5 +13,6 @@ export const routes: Routes = [
 	{ path: 'proveedores/editar/:id', canActivate: [AuthGuard], component: ProveedorFormComponent },
 	{ path: 'productos', canActivate: [AuthGuard], loadComponent: () => import('./productos.component').then(m => m.ProductosComponent) },
 	{ path: 'clientes', canActivate: [AuthGuard], loadComponent: () => import('./clientes/clientes.component').then(m => m.ClientesComponent) },
+	{ path: 'cuentas-por-cobrar', canActivate: [AuthGuard], loadComponent: () => import('./cuentas-por-cobrar/cuentas-por-cobrar.component').then(m => m.CuentasPorCobrarComponent) },
 	{ path: '**', redirectTo: '' }
 ];

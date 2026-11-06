@@ -37,6 +37,12 @@ import { RouterLink } from '@angular/router';
           <span class="module-description">Accede al módulo para administrar clientes.</span>
           <span class="module-action">Ir a clientes <span aria-hidden="true">→</span></span>
         </a>
+        <a class="module-card" routerLink="/cuentas-por-cobrar">
+          <span class="module-icon receivable-icon" aria-hidden="true">CC</span>
+          <span class="module-title">Cuenta por Cobrar</span>
+          <span class="module-description">Administra cuentas, saldos y movimientos de cobranza.</span>
+          <span class="module-action">Ir a Cuenta por Cobrar <span aria-hidden="true">→</span></span>
+        </a>
       </section>
     </main>
   `,
@@ -146,6 +152,11 @@ import { RouterLink } from '@angular/router';
     .products-icon {
       color: #1d4ed8;
       background: #eaf1ff;
+    }
+
+    .receivable-icon {
+      color: #166534;
+      background: #dcfce7;
     }
 
     .module-title {

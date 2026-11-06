@@ -17,6 +17,7 @@ import { AuthService } from './services/auth.service';
         <a routerLink="/ventas" routerLinkActive="active">Ventas</a>
         <a routerLink="/productos" routerLinkActive="active">Inventario</a>
         <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
+        <a routerLink="/cuentas-por-cobrar" routerLinkActive="active">Cuenta por Cobrar</a>
         @if (auth.isLoggedIn()) {
           <button class="nav-action" type="button" [disabled]="cerrandoSesion()" (click)="salir()">
             {{ cerrandoSesion() ? 'Saliendo...' : 'Salir' }}

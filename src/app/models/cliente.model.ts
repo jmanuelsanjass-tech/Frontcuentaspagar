@@ -1,33 +1,25 @@
 export interface Cliente {
-  id: number;
-  nombreComercial: string;
-  razonSocial: string;
-  rfc: string;
-  situacionFiscal: string;
-  tipoCliente: string;
-  direccion: string;
-  colonia: string;
-  ciudad: string;
-  contacto: string;
-  banco: string;
-  cuentaBancaria: string;
-  clabe: string;
-  formaPago: string;
-  fechaAlta: string;
+  idCliente: number;
+  nombre: string;
+  telefono: string;
+  correo: string;
+  direccion: string | null;
+  estadoDireccion: string;
+  fechaRegistro: string | null;
+  estado: string | null;
+  historialCompras: string | null;
+  fechaAuditoria: string | null;
+  usuarioAuditoria: string | null;
+  qrCode: string | null;
 }
 
-export interface ClienteUpdate {
-  nombreComercial: string;
-  razonSocial: string;
-  rfc: string;
-  situacionFiscal: string;
-  tipoCliente: string;
+export interface ClienteRequest {
+  nombre: string;
+  telefono: string;
+  correo: string;
   direccion: string | null;
-  colonia: string | null;
-  ciudad: string | null;
-  contacto: string | null;
-  banco: string | null;
-  cuentaBancaria: string | null;
-  clabe: string | null;
-  formaPago: string | null;
+  estadoDireccion: string;
+  estado: string;
+  historialCompras: string | null;
+  qrCode?: string;
 }

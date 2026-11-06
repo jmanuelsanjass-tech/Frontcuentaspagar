@@ -45,6 +45,30 @@ Tras una respuesta exitosa, `AuthService` guarda `authenticated=true` en `localS
 
 El valor de `localStorage` es únicamente un indicador de estado para la interfaz: no es un token ni demuestra por sí mismo la identidad del usuario. El componente no conserva la contraseña después de la solicitud. El backend debe autenticar cada solicitud protegida y aplicar allí las reglas de autorización; no se debe confiar en este indicador para proteger recursos.
 
+## Pantalla de clientes
+
+La pantalla `/clientes` consume el CRUD de `${environment.apiUrl}/api/clientes`: `GET` lista, `GET /{id}` consulta el detalle, `POST` crea, `PUT /{id}` actualiza y `DELETE /{id}` elimina. La respuesta identifica cada registro con `idCliente`.
+
+El formulario envía `nombre`, `telefono`, `correo`, `direccion`, `estadoDireccion`, `estado` e `historialCompras`; `qrCode` se omite si está vacío. El teléfono debe contener exactamente 10 dígitos, `estadoDireccion` corresponde a uno de los 32 estados admitidos y `estado` acepta `activo`, `inactivo` o `prospecto`. El código QR opcional se ingresa como Base64 sin prefijo `data:`. Las respuestas HTTP `404` se muestran en la operación correspondiente.
+
+## Pantalla de proveedores
+
+La pantalla `/proveedores` consume el CRUD de `${environment.apiUrl}/api/proveedores`: `GET` lista, `GET /{id}` consulta el detalle, `POST` crea, `PUT /{id}` actualiza y `DELETE /{id}` elimina. La respuesta identifica cada registro con `idProveedor`.
+
+El formulario envía `nombre`, `telefono`, `correo`, `direccion`, `estadoDireccion`, `estado` y `productosSuministrados`. El teléfono debe contener exactamente 10 dígitos; el correo debe ser válido y único; `estadoDireccion` debe ser uno de los 32 estados admitidos y `estado` acepta `activo` o `inactivo`. El identificador, fechas de registro/auditoría y `qrCode` se gestionan aparte y no se envían en el formulario. Los errores HTTP y las respuestas `404` se muestran en la operación correspondiente.
+
+## Pantalla de ventas
+
+La pantalla `/ventas` consume `GET /api/ventas`, `GET /api/ventas/{id}`, `POST /api/ventas`, `PUT /api/ventas/{id}` y `DELETE /api/ventas/{id}`. El listado y la consulta muestran cada venta con sus detalles; al editar, se envía la lista completa de detalles que debe quedar guardada.
+
+El formulario envía únicamente `clienteId`, `descuento`, `iva`, `estado` y `detalles` con `codigoBarras`, `cantidad` y `precioUnitario`. El subtotal estimado suma cantidad por precio unitario y el total estimado es subtotal menos descuento más IVA; el servidor calcula y persiste los importes definitivos. No se envían IDs de venta o detalle, subtotal, total ni campos de auditoría.
+
+## Pantalla de cuentas por cobrar
+
+El menú principal incluye `/cuentas-por-cobrar`, con secciones para cuentas y su historia. La pantalla consume el CRUD de `/api/cuentas-por-cobrar` y `/api/cuentas-por-cobrar-historia`, incluyendo consultas individuales, edición y eliminación. La cuenta requiere cliente, venta y fechas; el backend verifica que la venta pertenezca al cliente. Los importes y días vencidos vacíos se envían como cero; los estatus aceptados son `Pendiente`, `Pagado` y `Cancelado`.
+
+El historial requiere `idHistoria` al crear y permite los tipos `ALTA`, `ABONO`, `Cancelado`, `PAGO_TOTAL`, `REESTRUCTURA`, `PRORROGA`, `CANCELACION`, `CASTIGO`, `BLOQUEO_CREDITO` y `DESBLOQUEO_CREDITO`. Registrar o editar un movimiento no actualiza automáticamente el saldo de la cuenta. Una cuenta con movimientos de historia asociados podría no poder eliminarse por la llave foránea.
+
 ### Interfaz y versión
 
 La pantalla ofrece enlaces al menú principal (`/`) y al registro (`/register`), foco visible para los controles y mensajes de error asociados a los campos o anunciados como alertas. La ilustración del encabezado usa `NgOptimizedImage`. La versión visible en la tarjeta se importa de `src/environments/deployment-version.ts`.
