@@ -1,6 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { getVisibleNavigationItems } from './navigation';
 
 @Component({
   imports: [RouterLink, RouterLinkActive, RouterOutlet],
@@ -12,13 +13,14 @@ import { AuthService } from './services/auth.service';
         <span>Punto de Venta</span>
       </a>
       <nav class="main-nav" aria-label="Menú principal">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-        <a routerLink="/proveedores" routerLinkActive="active">Proveedores</a>
-        <a routerLink="/ventas" routerLinkActive="active">Ventas</a>
-        <a routerLink="/productos" routerLinkActive="active">Inventario</a>
-        <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
-        <a routerLink="/cuentas-por-cobrar" routerLinkActive="active">Cuenta por Cobrar</a>
         @if (auth.isLoggedIn()) {
+          @for (item of navigationItems(); track item.id) {
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: item.id === 'home' }"
+            >{{ item.label }}</a>
+          }
           <button class="nav-action" type="button" [disabled]="cerrandoSesion()" (click)="salir()">
             {{ cerrandoSesion() ? 'Saliendo...' : 'Salir' }}
           </button>
@@ -90,6 +92,9 @@ export class App {
   protected readonly cerrandoSesion = signal(false);
   protected readonly errorCierre = signal('');
   protected readonly auth = inject(AuthService);
+  protected readonly navigationItems = computed(() =>
+    getVisibleNavigationItems(this.auth.userRoles()),
+  );
   private readonly router = inject(Router);
 
   salir(): void {

@@ -19,31 +19,53 @@ El despliegue de Firebase requiere el secreto `FIREBASE_SERVICE_ACCOUNT_ZAPATERI
 
 ## Nota técnica: inicio de sesión
 
-### Componentes y responsabilidades
+### Archivos y responsabilidades
 
-- `src/app/auth/login.component.ts` presenta la pantalla, valida los campos, coordina el envío y muestra los estados de carga y error. Es un componente standalone que utiliza formularios reactivos, señales de Angular para el estado local y `Router` para la navegación.
-- `src/app/services/auth.service.ts` encapsula las solicitudes de autenticación y mantiene el indicador de sesión usado por el frontend.
-- `src/environments/environment.ts` define la URL base de la API en desarrollo; `src/environments/environment.production.ts` la define para producción.
+- `src/app/auth/login.component.ts` implementa la pantalla de acceso y su formulario reactivo. Las señales `cargando` y `error` controlan los estados de envío y los mensajes.
+- `src/app/auth/register.component.ts` implementa el registro, con los campos de usuario, contraseña y rol.
+- `src/app/services/auth.service.ts` concentra las solicitudes HTTP de autenticación y mantiene el indicador de sesión del frontend.
+- `src/app/auth/auth.guard.ts` protege la navegación a las pantallas internas comprobando el estado que expone `AuthService`.
+- `src/app/app.routes.ts` declara las rutas públicas y las rutas protegidas con `AuthGuard`.
+- `src/app/app.ts` presenta la navegación global y coordina el cierre de sesión.
+- `src/environments/environment.ts` define la URL base de la API para desarrollo; `src/environments/environment.production.ts` define la URL de producción.
 
-### Formulario y validación
+El endpoint `POST /api/auth/login` debe responder con `{ "username": "melissa", "roles": ["VENTAS"] }`. La interfaz usa esos roles para filtrar los enlaces de navegación y los módulos del menú principal, y para impedir la navegación directa a módulos no habilitados. `VENTAS` permite Inicio y Ventas; `ADMIN`, `ROLE_ADMIN` y `ROLE_USER` permiten todos los módulos. La autorización definitiva de las operaciones debe seguir aplicándose en el backend.
 
-El formulario contiene `username` y `password`, ambos obligatorios mediante `Validators.required`. Al intentar enviar un formulario inválido, no se hace ninguna solicitud y se marcan todos los controles como tocados para mostrar los mensajes de validación. El botón permanece deshabilitado mientras el formulario sea inválido o haya una solicitud en curso.
+### Inicio de sesión
 
-El control de contraseña utiliza `type="password"`. Los campos tienen etiquetas asociadas, atributos de autocompletado (`username` y `current-password`) y mensajes de error vinculados con `aria-describedby`; `aria-invalid` refleja si un campo inválido ya fue tocado.
+1. La ruta `/login` está disponible sin sesión. El formulario solicita `username` y `password`; ambos son obligatorios mediante `Validators.required`.
+2. Si el formulario es inválido o ya hay una solicitud en curso, no se envía otra petición. Los controles se marcan como tocados para mostrar su validación.
+3. `AuthService.login()` envía `POST /api/auth/login` con el JSON `{ "username": "...", "password": "..." }`. La respuesta se consume como `void`; el frontend no procesa un token en el cuerpo.
+4. Si el servidor responde correctamente, el componente llama a `markAuthenticated()` y navega a `/`. Si la solicitud devuelve `401` o `403`, informa que las credenciales no son válidas; para otros errores HTTP o de conexión presenta un mensaje general.
+5. El estado de carga se restablece después de la respuesta y de la navegación. Los errores se anuncian con `role="alert"`.
 
-### Flujo de autenticación
+El campo de contraseña usa `type="password"` y los campos incluyen etiquetas, atributos de autocompletado (`username` y `current-password`), mensajes asociados mediante `aria-describedby` y `aria-invalid` cuando corresponde. La validación del cliente solo comprueba que los valores no estén vacíos; la autenticación y cualquier política adicional deben validarse en el servidor.
 
-1. `login()` comprueba de nuevo que el formulario sea válido y que no exista una autenticación en curso. Esta guardia evita envíos inválidos o duplicados.
-2. Se limpia el error anterior, se activa el estado `cargando` y se leen los valores del formulario.
-3. `AuthService.login(username, password)` envía un `POST` con el cuerpo JSON `{ username, password }` a `${environment.apiUrl}/api/auth/login`. En desarrollo, las solicitudes `/api` se reenvían al backend local mediante `proxy.conf.json`.
-4. Si la solicitud termina correctamente, se llama a `markAuthenticated()` y se navega a la ruta `/`. Al finalizar la navegación se desactiva el estado de carga.
-5. Si la solicitud falla con HTTP `401` o `403`, se muestra un mensaje de credenciales inválidas. Para otros errores HTTP o de conexión se muestra un mensaje general que indica que no fue posible iniciar sesión. En ambos casos se restablece el estado de carga y el error se anuncia con `role="alert"`.
+### Registro
 
-### Estado de sesión y límites de seguridad
+La ruta `/register` también es pública. El formulario envía `POST /api/auth/register` con `{ "username": "...", "password": "...", "rol": "ROLE_USER" }`; el rol inicial del formulario es `ROLE_USER` y también se ofrece `ROLE_ADMIN`. La respuesta se trata como texto. Cuando el registro termina correctamente, se informa al usuario y se navega a `/login`; el registro no inicia automáticamente una sesión.
 
-Tras una respuesta exitosa, `AuthService` guarda `authenticated=true` en `localStorage` y actualiza su señal interna. Al inicializarse en el navegador, recupera ese indicador; en contextos que no son navegador no accede a `localStorage`. El servicio también expone `isLoggedIn()`, `clearAuthentication()` y `logout()` para consultar, limpiar el indicador y solicitar el cierre de sesión.
+Los errores de registro distinguen, entre otros, problemas de conexión (`status 0`), ruta inexistente (`404`), datos rechazados o usuario duplicado (`400` o `409`) y falta de autorización (`401` o `403`). El mensaje del servidor se muestra cuando se entrega en un formato reconocido.
 
-El valor de `localStorage` es únicamente un indicador de estado para la interfaz: no es un token ni demuestra por sí mismo la identidad del usuario. El componente no conserva la contraseña después de la solicitud. El backend debe autenticar cada solicitud protegida y aplicar allí las reglas de autorización; no se debe confiar en este indicador para proteger recursos.
+La selección de rol en el cliente no debe considerarse una autorización. En producción, el servidor debe impedir que una persona se asigne privilegios administrativos mediante el registro público; idealmente, la asignación de roles privilegiados se realiza solo por un flujo administrativo confiable.
+
+### Estado de sesión, rutas y cierre de sesión
+
+Después de un inicio de sesión exitoso, `markAuthenticated()` guarda `authenticated=true` en `localStorage` y actualiza una señal. Al cargar la aplicación en un navegador, `AuthService` recupera ese valor; durante la renderización fuera del navegador no accede a `localStorage`. `isLoggedIn()` consulta la señal y `clearAuthentication()` elimina el valor local y actualiza la señal.
+
+`AuthGuard` usa `isLoggedIn()` para dejar pasar las rutas internas o redirigir a `/login`. Las rutas de inicio de sesión y registro no requieren esta guarda. El guard controla la navegación y la experiencia de usuario dentro de Angular: no impide que alguien invoque directamente la API ni sustituye los controles de acceso del backend.
+
+Al seleccionar **Salir**, `app.ts` solicita `POST /api/auth/logout`. Si el servidor responde correctamente, se borra el indicador local y se navega a `/login`. Si falla la solicitud, también se borra el indicador local y se navega a `/login`, pero se informa que el servidor no confirmó el cierre. La aplicación no conserva la contraseña después del envío.
+
+### URL de API y desarrollo
+
+En desarrollo, `environment.apiUrl` es una cadena vacía; por ello las solicitudes se hacen a rutas relativas como `/api/auth/login`. `npm start` aplica `proxy.conf.json` y reenvía `/api/**` a `http://localhost:8080`. En producción, `environment.production.ts` configura la URL completa del backend. El proxy local no participa en el despliegue.
+
+### Consideraciones de seguridad
+
+El valor `authenticated` de `localStorage` es únicamente un indicador de interfaz: no es un token, no está firmado y no prueba la identidad del usuario. Un usuario puede modificarlo desde el navegador. Por tanto, ni `AuthGuard` ni la visibilidad del botón **Salir** protegen los datos.
+
+En la configuración actual de `BCuentaPagar/demo`, `SecurityConfig` usa `.anyRequest().permitAll()`. Esto permite que todas las solicitudes pasen el filtro de autorización de Spring Security sin autenticarse, incluso si las páginas de Angular están protegidas por `AuthGuard`. La autorización efectiva requiere que el backend aplique autenticación y permisos en cada endpoint protegido; para usar una sesión HTTP también deben configurarse y enviarse correctamente las credenciales/cookies en las solicitudes entre dominios. Deshabilitar CSRF requiere además evaluar cuidadosamente el mecanismo de autenticación elegido antes de producción.
 
 ## Pantalla de clientes
 

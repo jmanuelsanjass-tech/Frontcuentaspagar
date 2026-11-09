@@ -297,8 +297,13 @@ export class LoginComponent {
     const { username, password } = this.form.getRawValue();
 
     this.auth.login(username, password).subscribe({
-      next: () => {
-        this.auth.markAuthenticated();
+      next: (response: unknown) => {
+        if (!this.auth.startSession(response)) {
+          this.error.set('El servidor devolvió una respuesta de inicio de sesión no válida.');
+          this.cargando.set(false);
+          return;
+        }
+
         void this.router.navigate(['/']).finally(() => this.cargando.set(false));
       },
       error: (response: HttpErrorResponse) => {

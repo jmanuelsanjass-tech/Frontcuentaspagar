@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { getVisibleNavigationItems } from './navigation';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -7,42 +9,24 @@ import { RouterLink } from '@angular/router';
   template: `
     <main class="dashboard">
       <section class="welcome" aria-labelledby="welcome-title">
-        <p class="eyebrow"></p>
+        @if (auth.currentUser(); as user) {
+          <p class="eyebrow">Bienvenido, {{ user.username }}</p>
+        }
         <h1 id="welcome-title">Menú principal</h1>
         <p class="welcome-copy">Accede rápidamente.</p>
       </section>
 
       <section class="module-grid" aria-label="Módulos disponibles">
-        <a class="module-card" routerLink="/proveedores">
-          <span class="module-icon suppliers-icon" aria-hidden="true">PR</span>
-          <span class="module-title">Proveedores</span>
-          <span class="module-description">Consulta y administra el directorio de proveedores.</span>
-          <span class="module-action">Ir a proveedores <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="module-card" routerLink="/ventas">
-          <span class="module-icon sales-icon" aria-hidden="true">VE</span>
-          <span class="module-title">Ventas</span>
-          <span class="module-description">Registra productos, pagos y ventas.</span>
-          <span class="module-action">Ir a ventas <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="module-card" routerLink="/productos">
-          <span class="module-icon products-icon" aria-hidden="true">PR</span>
-          <span class="module-title">Inventario</span>
-          <span class="module-description">Consulta y administra el inventario de productos.</span>
-          <span class="module-action">Ir a Inventario <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="module-card" routerLink="/clientes">
-          <span class="module-icon customers-icon" aria-hidden="true">CL</span>
-          <span class="module-title">Clientes</span>
-          <span class="module-description">Accede al módulo para administrar clientes.</span>
-          <span class="module-action">Ir a clientes <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="module-card" routerLink="/cuentas-por-cobrar">
-          <span class="module-icon receivable-icon" aria-hidden="true">CC</span>
-          <span class="module-title">Cuenta por Cobrar</span>
-          <span class="module-description">Administra cuentas, saldos y movimientos de cobranza.</span>
-          <span class="module-action">Ir a Cuenta por Cobrar <span aria-hidden="true">→</span></span>
-        </a>
+        @for (item of moduleItems(); track item.id) {
+          <a class="module-card" [routerLink]="item.path">
+            <span [class]="item.iconClass" aria-hidden="true">{{ item.icon }}</span>
+            <span class="module-title">{{ item.title }}</span>
+            <span class="module-description">{{ item.description }}</span>
+            <span class="module-action">{{ item.action }} <span aria-hidden="true">→</span></span>
+          </a>
+        } @empty {
+          <p class="empty-menu" role="status">No hay módulos disponibles para tu rol.</p>
+        }
       </section>
     </main>
   `,
@@ -96,6 +80,11 @@ import { RouterLink } from '@angular/router';
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .empty-menu {
+      margin: 0;
+      color: #52637a;
     }
 
     .module-card {
@@ -217,4 +206,9 @@ import { RouterLink } from '@angular/router';
     }
   `,
 })
-export class MenuPrincipalComponent {}
+export class MenuPrincipalComponent {
+  protected readonly auth = inject(AuthService);
+  protected readonly moduleItems = computed(() =>
+    getVisibleNavigationItems(this.auth.userRoles()).filter((item) => item.id !== 'home'),
+  );
+}
