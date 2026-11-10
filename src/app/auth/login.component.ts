@@ -22,8 +22,9 @@ imports: [NgOptimizedImage, ReactiveFormsModule, RouterLink];
           <img
             class="erp-illustration"
             ngSrc="assets/menu.png"
-            width="120"
-            height="88"
+            width="212"
+            height="200"
+            priority
             alt="Menú ERP"
           />
 
@@ -129,7 +130,7 @@ imports: [NgOptimizedImage, ReactiveFormsModule, RouterLink];
 
     .erp-illustration {
       display: block;
-      width: 120px;
+      width: 93px;
       height: 88px;
       object-fit: contain;
     }

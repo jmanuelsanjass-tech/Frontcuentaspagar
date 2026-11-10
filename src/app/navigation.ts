@@ -4,7 +4,8 @@ export type NavigationItemId =
   | 'sales'
   | 'products'
   | 'customers'
-  | 'receivables';
+  | 'receivables'
+  | 'users';
 
 export interface NavigationItem {
   id: NavigationItemId;
@@ -18,11 +19,12 @@ export interface NavigationItem {
 }
 
 const moduleRoles: Record<Exclude<NavigationItemId, 'home'>, readonly string[]> = {
-  suppliers: ['ADMIN', 'ROLE_ADMIN', 'ROLE_USER'],
-  sales: ['ADMIN', 'ROLE_ADMIN', 'ROLE_USER', 'VENTAS'],
-  products: ['ADMIN', 'ROLE_ADMIN', 'ROLE_USER'],
-  customers: ['ADMIN', 'ROLE_ADMIN', 'ROLE_USER'],
-  receivables: ['ADMIN', 'ROLE_ADMIN', 'ROLE_USER'],
+  suppliers: ['ADMIN', 'INVENTARIOS'],
+  sales: ['ADMIN', 'VENTAS'],
+  products: ['ADMIN', 'INVENTARIOS'],
+  customers: ['ADMIN', 'VENTAS'],
+  receivables: ['ADMIN', 'VENTAS', 'CONTABILIDAD'],
+  users: ['ADMIN'],
 };
 
 export const navigationItems: readonly NavigationItem[] = [
@@ -86,16 +88,31 @@ export const navigationItems: readonly NavigationItem[] = [
     icon: 'CC',
     iconClass: 'module-icon receivable-icon',
   },
+  {
+    id: 'users',
+    label: 'Usuarios',
+    path: '/usuarios',
+    title: 'Administración de usuarios',
+    description: 'Crea cuentas, asigna roles y consulta la bitácora administrativa.',
+    action: 'Administrar usuarios',
+    icon: 'US',
+    iconClass: 'module-icon users-icon',
+  },
 ];
 
 export function getVisibleNavigationItems(roles: readonly string[]): NavigationItem[] {
+  const normalizedRoles = roles.map((role) => {
+    const normalizedRole = role.trim().toUpperCase();
+    return normalizedRole.startsWith('ROLE_') ? normalizedRole.slice('ROLE_'.length) : normalizedRole;
+  });
+
   return navigationItems.filter((item) => {
     if (item.id === 'home') {
       return true;
     }
 
     const allowedRoles = moduleRoles[item.id];
-    return roles.some((role) => allowedRoles.includes(role.trim().toUpperCase()));
+    return normalizedRoles.some((role) => allowedRoles.includes(role));
   });
 }
 

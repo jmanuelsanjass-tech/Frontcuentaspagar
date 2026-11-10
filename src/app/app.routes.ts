@@ -14,5 +14,6 @@ export const routes: Routes = [
 	{ path: 'productos', canActivate: [AuthGuard], data: { navigationItemId: 'products' }, loadComponent: () => import('./productos.component').then(m => m.ProductosComponent) },
 	{ path: 'clientes', canActivate: [AuthGuard], data: { navigationItemId: 'customers' }, loadComponent: () => import('./clientes/clientes.component').then(m => m.ClientesComponent) },
 	{ path: 'cuentas-por-cobrar', canActivate: [AuthGuard], data: { navigationItemId: 'receivables' }, loadComponent: () => import('./cuentas-por-cobrar/cuentas-por-cobrar.component').then(m => m.CuentasPorCobrarComponent) },
+	{ path: 'usuarios', canActivate: [AuthGuard], data: { navigationItemId: 'users' }, loadComponent: () => import('./admin/usuarios.component').then(m => m.UsuariosComponent) },
 	{ path: '**', redirectTo: '' }
 ];

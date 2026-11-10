@@ -29,7 +29,9 @@ El despliegue de Firebase requiere el secreto `FIREBASE_SERVICE_ACCOUNT_ZAPATERI
 - `src/app/app.ts` presenta la navegación global y coordina el cierre de sesión.
 - `src/environments/environment.ts` define la URL base de la API para desarrollo; `src/environments/environment.production.ts` define la URL de producción.
 
-El endpoint `POST /api/auth/login` debe responder con `{ "username": "melissa", "roles": ["VENTAS"] }`. La interfaz usa esos roles para filtrar los enlaces de navegación y los módulos del menú principal, y para impedir la navegación directa a módulos no habilitados. `VENTAS` permite Inicio y Ventas; `ADMIN`, `ROLE_ADMIN` y `ROLE_USER` permiten todos los módulos. La autorización definitiva de las operaciones debe seguir aplicándose en el backend.
+El endpoint `POST /api/auth/login` devuelve `{ "username": "melissa", "roles": ["VENTAS"] }` a partir de las autoridades cargadas desde `usuarios` y `usuarios_roles`. La interfaz usa esos roles para filtrar los enlaces y los módulos del menú, pero la autorización definitiva se aplica en el backend. `ADMIN` puede acceder a todos los módulos; `VENTAS`, a Ventas, Clientes y Cuenta por Cobrar; `INVENTARIOS`, a Proveedores e Inventario; `CONTABILIDAD`, a Cuenta por Cobrar. El rol `USER` no habilita módulos de negocio. Las solicitudes al API usan la cookie de sesión y el token CSRF de `GET /api/auth/csrf`.
+
+El flujo de Administración de Usuarios está disponible en `/usuarios` solo para `ADMIN`. Permite crear, modificar y activar/desactivar usuarios, cambiar contraseñas y asignar roles; la bitácora registra estos cambios sin guardar contraseñas. Antes de desplegar el backend, ejecuta `src/main/resources/db/manual/create_bitacora_usuarios.sql` en la base de datos.
 
 ### Inicio de sesión
 

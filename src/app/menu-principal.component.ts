@@ -148,6 +148,11 @@ import { AuthService } from './services/auth.service';
       background: #dcfce7;
     }
 
+    .users-icon {
+      color: #7c2d12;
+      background: #ffedd5;
+    }
+
     .module-title {
       font-size: 20px;
       font-weight: 700;

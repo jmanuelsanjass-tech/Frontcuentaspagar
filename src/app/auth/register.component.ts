@@ -71,10 +71,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
           </a>
           <img
             class="erp-illustration"
-            ngSrc="/erp-dashboard.svg"
-            width="96"
-            height="70"
-            alt="Ilustración de un panel de gestión ERP"
+            ngSrc="assets/menu.png"
+            width="212"
+            height="200"
+            alt="Menú ERP"
             priority
           />
         </div>
