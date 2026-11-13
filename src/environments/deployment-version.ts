@@ -1,1 +1,1 @@
-export const deploymentVersion = '2.1.3';
+export const deploymentVersion = '2.1.4';
