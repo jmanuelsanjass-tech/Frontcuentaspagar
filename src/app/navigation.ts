@@ -5,6 +5,7 @@ export type NavigationItemId =
   | 'products'
   | 'customers'
   | 'receivables'
+  | 'payables'
   | 'users';
 
 export interface NavigationItem {
@@ -24,6 +25,15 @@ const moduleRoles: Record<Exclude<NavigationItemId, 'home'>, readonly string[]> 
   products: ['ADMIN', 'INVENTARIOS'],
   customers: ['ADMIN', 'VENTAS'],
   receivables: ['ADMIN', 'VENTAS', 'CONTABILIDAD'],
+  payables: [
+    'ADMIN',
+    'COMPRAS',
+    'RECEPCION',
+    'CONTABILIDAD',
+    'TESORERIA',
+    'AUDITOR',
+    'INVENTARIOS',
+  ],
   users: ['ADMIN'],
 };
 
@@ -86,6 +96,16 @@ export const navigationItems: readonly NavigationItem[] = [
     description: 'Administra cuentas, saldos y movimientos de cobranza.',
     action: 'Ir a Cuenta por Cobrar',
     icon: 'CC',
+    iconClass: 'module-icon receivable-icon',
+  },
+  {
+    id: 'payables',
+    label: 'Cuentas por pagar',
+    path: '/cuentas-por-pagar',
+    title: 'Cuentas por pagar',
+    description: 'Consulta compras, recepciones, facturas, pagos y auditoría.',
+    action: 'Ir a Cuentas por pagar',
+    icon: 'CP',
     iconClass: 'module-icon receivable-icon',
   },
   {

@@ -12,7 +12,13 @@ describe('getVisibleNavigationItems', () => {
   });
 
   it.each(['ADMIN', 'ROLE_ADMIN'])('shows all modules for %s', (role) => {
-    expect(getVisibleNavigationItems([role])).toHaveLength(7);
+    expect(getVisibleNavigationItems([role])).toHaveLength(8);
+  });
+
+  it('shows accounts payable to the proposed roles', () => {
+    for (const role of ['COMPRAS', 'RECEPCION', 'CONTABILIDAD', 'TESORERIA', 'AUDITOR']) {
+      expect(getVisibleNavigationItems([role]).some((item) => item.id === 'payables')).toBe(true);
+    }
   });
 
   it('only shows modules assigned to the USER role', () => {
