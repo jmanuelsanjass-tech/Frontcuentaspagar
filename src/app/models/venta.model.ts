@@ -1,5 +1,6 @@
 export interface VentaDetalle {
   detalleId: number;
+  nombreProducto?: string | null;
   codigoBarras: string;
   cantidad: number;
   precioUnitario: number;
@@ -14,6 +15,10 @@ export interface Venta {
   descuento: number | null;
   iva: number;
   total: number;
+  montoRecibido: number;
+  montoSobrante: number;
+  tipoMoneda: string;
+  bancoCorto: string | null;
   estado: string | null;
   usuarioAuditoria: string | null;
   fechaAuditoria: string | null;
@@ -31,6 +36,10 @@ export interface VentaRequest {
   clienteId: number;
   descuento: number;
   iva: number;
+  montoRecibido: number;
+  montoSobrante: number; // <-- ¡ESTE ERA EL QUE FALTABA!
+  tipoMoneda: string;
+  bancoCorto: string | null;
   estado: string;
   detalles: VentaDetalleRequest[];
 }

@@ -43,6 +43,10 @@ El flujo de Administración de Usuarios está disponible en `/usuarios` solo par
 
 El campo de contraseña usa `type="password"` y los campos incluyen etiquetas, atributos de autocompletado (`username` y `current-password`), mensajes asociados mediante `aria-describedby` y `aria-invalid` cuando corresponde. La validación del cliente solo comprueba que los valores no estén vacíos; la autenticación y cualquier política adicional deben validarse en el servidor.
 
+### Ventas
+
+En el formulario de ventas, el cliente se puede buscar por nombre o ID y debe seleccionarse una sugerencia para asignar el ID que se envía al backend. La forma de pago es `Pesos` (efectivo) o `Tarjeta de Crédito`. Para efectivo se captura el monto recibido y se calcula el cambio; para tarjeta el monto recibido coincide con el total y el cambio es cero.
+
 ### Registro
 
 La ruta `/register` también es pública. El formulario envía `POST /api/auth/register` con `{ "username": "...", "password": "...", "rol": "ROLE_USER" }`; el rol inicial del formulario es `ROLE_USER` y también se ofrece `ROLE_ADMIN`. La respuesta se trata como texto. Cuando el registro termina correctamente, se informa al usuario y se navega a `/login`; el registro no inicia automáticamente una sesión.
