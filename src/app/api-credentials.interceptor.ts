@@ -1,14 +1,8 @@
-import { HttpClient, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { switchMap } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
-interface CsrfTokenResponse {
-  headerName: string;
-  token: string;
-}
-
 export const apiCredentialsInterceptor: HttpInterceptorFn = (request, next) => {
+  // Verificamos si es una petición a nuestra API
   const isApiRequest = environment.apiUrl
     ? request.url.startsWith(environment.apiUrl)
     : request.url.startsWith('/api/');
@@ -17,19 +11,11 @@ export const apiCredentialsInterceptor: HttpInterceptorFn = (request, next) => {
     return next(request);
   }
 
-  const credentialedRequest = request.clone({ withCredentials: true });
-  if (['GET', 'HEAD', 'OPTIONS', 'TRACE'].includes(request.method)) {
-    return next(credentialedRequest);
-  }
+  // Solo clonamos la petición agregando withCredentials: true
+  // Esto asegura que la cookie JSESSIONID viaje al backend y regrese al navegador.
+  const credentialedRequest = request.clone({ 
+    withCredentials: true 
+  });
 
-  const http = inject(HttpClient);
-  return http
-    .get<CsrfTokenResponse>(`${environment.apiUrl}/api/auth/csrf`, {
-      withCredentials: true,
-    })
-    .pipe(
-      switchMap(({ headerName, token }) =>
-        next(credentialedRequest.clone({ setHeaders: { [headerName]: token } })),
-      ),
-    );
+  return next(credentialedRequest);
 };

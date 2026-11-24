@@ -22,21 +22,27 @@ export class AuthService {
   private readonly authenticated = signal(
     this.isBrowser && localStorage.getItem('authenticated') === 'true',
   );
+  
   readonly currentUser = this.currentUserState.asReadonly();
   readonly userRoles = computed(() => this.currentUserState()?.roles ?? []);
 
   login(username: string, password: string): Observable<unknown> {
-    return this.http.post<unknown>(`${this.apiUrl}/login`, { username, password });
+    return this.http.post<unknown>(`${this.apiUrl}/login`, { username, password }, { 
+      withCredentials: true 
+    });
   }
 
   register(username: string, password: string, rol: string): Observable<string> {
     return this.http.post(`${this.apiUrl}/register`, { username, password, rol }, {
       responseType: 'text',
+      withCredentials: true
     });
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/logout`, {});
+    return this.http.post<void>(`${this.apiUrl}/logout`, {}, { 
+      withCredentials: true 
+    });
   }
 
   startSession(response: unknown): boolean {

@@ -305,7 +305,8 @@ export class LoginComponent {
           return;
         }
 
-        void this.router.navigate(['/']).finally(() => this.cargando.set(false));
+        // En tu login.component.ts
+        void this.router.navigate(['/menu']).finally(() => this.cargando.set(false));
       },
       error: (response: HttpErrorResponse) => {
         this.error.set(

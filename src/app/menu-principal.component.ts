@@ -213,7 +213,13 @@ import { AuthService } from './services/auth.service';
 })
 export class MenuPrincipalComponent {
   protected readonly auth = inject(AuthService);
+
   protected readonly moduleItems = computed(() =>
-    getVisibleNavigationItems(this.auth.userRoles()).filter((item) => item.id !== 'home'),
+    getVisibleNavigationItems(this.auth.userRoles()).filter(
+      item =>
+        item.id !== 'home' &&
+        item.id !== 'receivables' &&
+        item.id !== 'payables'
+    )
   );
 }

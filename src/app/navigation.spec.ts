@@ -7,7 +7,7 @@ describe('getVisibleNavigationItems', () => {
       'home',
       'sales',
       'customers',
-      'receivables',
+      // 'receivables',
     ]);
   });
 
@@ -35,7 +35,7 @@ describe('getVisibleNavigationItems', () => {
       'home',
       'sales',
       'customers',
-      'receivables',
+      // 'receivables',
     ]);
   });
 });

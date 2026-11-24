@@ -4,6 +4,7 @@ export type NavigationItemId =
   | 'sales'
   | 'products'
   | 'customers'
+  | 'accounting'
   | 'receivables'
   | 'payables'
   | 'users';
@@ -19,12 +20,34 @@ export interface NavigationItem {
   iconClass: string;
 }
 
-const moduleRoles: Record<Exclude<NavigationItemId, 'home'>, readonly string[]> = {
+const moduleRoles: Record<
+  Exclude<NavigationItemId, 'home'>,
+  readonly string[]
+> = {
+
   suppliers: ['ADMIN', 'INVENTARIOS'],
+
   sales: ['ADMIN', 'VENTAS'],
+
   products: ['ADMIN', 'INVENTARIOS'],
+
   customers: ['ADMIN', 'VENTAS'],
-  receivables: ['ADMIN', 'VENTAS', 'CONTABILIDAD'],
+
+  accounting: [
+    'ADMIN',
+    'CONTABILIDAD',
+    'TESORERIA',
+    'AUDITOR',
+    'COMPRAS',
+    'RECEPCION'
+  ],
+
+  receivables: [
+    'ADMIN',
+    'VENTAS',
+    'CONTABILIDAD'
+  ],
+
   payables: [
     'ADMIN',
     'COMPRAS',
@@ -32,11 +55,11 @@ const moduleRoles: Record<Exclude<NavigationItemId, 'home'>, readonly string[]> 
     'CONTABILIDAD',
     'TESORERIA',
     'AUDITOR',
-    'INVENTARIOS',
+    'INVENTARIOS'
   ],
-  users: ['ADMIN'],
-};
 
+  users: ['ADMIN']
+};
 export const navigationItems: readonly NavigationItem[] = [
   {
     id: 'home',
@@ -88,26 +111,38 @@ export const navigationItems: readonly NavigationItem[] = [
     icon: 'CL',
     iconClass: 'module-icon customers-icon',
   },
+{
+
+  id: 'receivables',
+  label: 'Cuenta por Cobrar',
+  path: '/cuentas-por-cobrar',
+  title: 'Cuenta por Cobrar',
+  description: 'Administra cuentas, saldos y movimientos de cobranza.',
+  action: 'Ir a Cuenta por Cobrar',
+  icon: 'CC',
+  iconClass: 'module-icon receivable-icon',
+},
+{
+  id: 'payables',
+  label: 'Cuentas por pagar',
+  path: '/cuentas-por-pagar',
+  title: 'Cuentas por pagar',
+  description: 'Consulta compras, recepciones, facturas, pagos y auditoría.',
+  action: 'Ir a Cuentas por pagar',
+  icon: 'CP',
+  iconClass: 'module-icon receivable-icon',
+},
   {
-    id: 'receivables',
-    label: 'Cuenta por Cobrar',
-    path: '/cuentas-por-cobrar',
-    title: 'Cuenta por Cobrar',
-    description: 'Administra cuentas, saldos y movimientos de cobranza.',
-    action: 'Ir a Cuenta por Cobrar',
-    icon: 'CC',
-    iconClass: 'module-icon receivable-icon',
+    id: 'accounting',
+    label: 'Contabilidad',
+    path: '/contabilidad',
+    title: 'Contabilidad',
+    description: 'Cuentas por cobrar, cuentas por pagar, bancos y reportes.',
+    action: 'Ir a Contabilidad',
+    icon: 'CO',
+    iconClass: 'module-icon accounting-icon',
   },
-  {
-    id: 'payables',
-    label: 'Cuentas por pagar',
-    path: '/cuentas-por-pagar',
-    title: 'Cuentas por pagar',
-    description: 'Consulta compras, recepciones, facturas, pagos y auditoría.',
-    action: 'Ir a Cuentas por pagar',
-    icon: 'CP',
-    iconClass: 'module-icon receivable-icon',
-  },
+
   {
     id: 'users',
     label: 'Usuarios',
@@ -120,19 +155,29 @@ export const navigationItems: readonly NavigationItem[] = [
   },
 ];
 
-export function getVisibleNavigationItems(roles: readonly string[]): NavigationItem[] {
+export function getVisibleNavigationItems(
+  roles: readonly string[]
+): NavigationItem[] {
+
   const normalizedRoles = roles.map((role) => {
     const normalizedRole = role.trim().toUpperCase();
-    return normalizedRole.startsWith('ROLE_') ? normalizedRole.slice('ROLE_'.length) : normalizedRole;
+
+    return normalizedRole.startsWith('ROLE_')
+      ? normalizedRole.slice('ROLE_'.length)
+      : normalizedRole;
   });
 
   return navigationItems.filter((item) => {
+
     if (item.id === 'home') {
       return true;
     }
 
     const allowedRoles = moduleRoles[item.id];
-    return normalizedRoles.some((role) => allowedRoles.includes(role));
+
+    return normalizedRoles.some((role) =>
+      allowedRoles.includes(role)
+    );
   });
 }
 
@@ -140,9 +185,15 @@ export function canAccessNavigationItem(
   itemId: NavigationItemId,
   roles: readonly string[],
 ): boolean {
-  return getVisibleNavigationItems(roles).some((item) => item.id === itemId);
+  return getVisibleNavigationItems(roles)
+    .some((item) => item.id === itemId);
 }
 
-export function isNavigationItemId(value: unknown): value is NavigationItemId {
-  return navigationItems.some((item) => item.id === value);
+export function isNavigationItemId(
+  value: unknown
+): value is NavigationItemId {
+  return navigationItems.some(
+    (item) => item.id === value
+  );
 }
+
