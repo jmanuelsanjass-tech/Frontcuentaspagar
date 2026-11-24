@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: '',
+  production: false,
+  apiUrl: 'http://localhost:8080' // <-- URL DIRECTA
 };
