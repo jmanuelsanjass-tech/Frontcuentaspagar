@@ -298,16 +298,22 @@ export class LoginComponent {
     const { username, password } = this.form.getRawValue();
 
     this.auth.login(username, password).subscribe({
-      next: (response: unknown) => {
+
+      next: (response: any) => { // Asegúrate de que el tipo sea any o tu interfaz LoginResponse
+        if (response.token) {
+          // AQUÍ GUARDAMOS EL TOKEN
+          localStorage.setItem('token', response.token); 
+        }
+
         if (!this.auth.startSession(response)) {
           this.error.set('El servidor devolvió una respuesta de inicio de sesión no válida.');
           this.cargando.set(false);
           return;
         }
 
-        // En tu login.component.ts
-        void this.router.navigate(['/menu']).finally(() => this.cargando.set(false));
+        void this.router.navigate(['/']).finally(() => this.cargando.set(false));
       },
+
       error: (response: HttpErrorResponse) => {
         this.error.set(
           response.status === 401 || response.status === 403
