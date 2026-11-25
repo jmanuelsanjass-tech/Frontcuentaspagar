@@ -11,9 +11,7 @@ import { Banco } from '../models/banco.model';
 import { BancoService } from '../services/banco.service';
 import { Cliente } from '../models/cliente.model';
 import { ClienteService } from '../services/cliente.service';
-
-
-
+import { TicketVentaComponent } from './ticket-venta/ticket-venta';
 
 interface LineaVentaEditor extends VentaDetalleRequest {
   nombreProducto: string;
@@ -22,7 +20,9 @@ interface LineaVentaEditor extends VentaDetalleRequest {
 
 @Component({
   selector: 'app-venta-form',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink ,TicketVentaComponent ],
+  
+
   template: `
     <main class="page">
       <header class="page-header">
@@ -391,6 +391,17 @@ interface LineaVentaEditor extends VentaDetalleRequest {
 
 }
 
+
+
+      <!-- COMPONENTE DEL TICKET AL FINAL -->
+      <app-ticket-venta 
+        [venta]="ventaParaTicket()" 
+        [visible]="mostrarTicket()" 
+        (cerrar)="mostrarTicket.set(false)">
+      </app-ticket-venta>
+
+
+
 </main>
   `,
   styles: `
@@ -636,6 +647,9 @@ readonly totalVenta = computed(() =>
     const recibido = Number(this.montoRecibidoSignal());
     return Math.max(0, this.redondear(recibido - this.totalVenta()));
   }); */
+
+protected readonly ventaParaTicket = signal<Venta | null>(null);
+protected readonly mostrarTicket = signal(false);
 
   readonly montoSobrante = computed(() => {
   if (!this.esEfectivo()) return 0;
@@ -961,17 +975,19 @@ const request: VentaRequest = {
       }
     }); */
 
-this.ventaService.crear(request).subscribe({
-  next: (venta) => {
-    this.ventas.update((v) => [...v, venta]);
-    this.mensaje.set('Venta registrada correctamente.');
-    this.guardando.set(false);
-    this.resetEditor();
-  },
-
-  error: (err: HttpErrorResponse) => {
-
-    console.log('STATUS:', err.status);
+    this.ventaService.crear(request).subscribe({
+      next: (venta) => {
+        this.ventas.update((v) => [...v, venta]);
+        this.mensaje.set('Venta registrada correctamente.');
+        this.guardando.set(false);
+        
+        // ¡AQUÍ ABRIMOS EL TICKET AUTOMÁTICAMENTE!
+        this.verTicket(venta); 
+        
+        this.resetEditor();
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log('STATUS:', err.status);
     console.log('STATUS TEXT:', err.statusText);
     console.log('ERROR:', err.error);
     console.log('FULL ERROR:', err);
@@ -1036,6 +1052,10 @@ this.ventaService.crear(request).subscribe({
   editar(v: Venta) { /* Tu lógica original de edición */ }
   solicitarEliminacion(v: Venta) { /* Tu lógica original de eliminación */ }
 
+    verTicket(venta: Venta): void {
+    this.ventaParaTicket.set(venta);
+    this.mostrarTicket.set(true);
+  }
 
 
 }
