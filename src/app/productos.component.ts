@@ -3,6 +3,9 @@ import { CurrencyPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProductoResponse, ProductoRequest, ProductoService } from './services/producto.service';
+import { ProveedorService } from '../app/services/proveedor.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 // Adaptamos la interfaz al backend
 interface Producto {
@@ -15,6 +18,16 @@ interface Producto {
   stock: number;
   activo: boolean;
   fechaAlta: string;
+
+  idProveedor: number | null;
+  nombreProveedor: string;
+}
+
+  interface ProveedorBusqueda {
+  idProveedor: number;
+  nombre: string;
+  telefono?: string;
+  correo?: string;
 }
 
 @Component({
@@ -74,6 +87,55 @@ interface Producto {
                   <option value="Limpieza e higiene personal">Limpieza e higiene personal</option>
                 </select>
               </div>
+
+
+              <div class="field provider-field">
+
+            <label for="proveedor">
+              Proveedor
+              <span aria-hidden="true">*</span>
+            </label>
+
+            <input
+              id="proveedor"
+              type="text"
+              formControlName="proveedorNombre"
+              placeholder="Buscar proveedor..."
+              autocomplete="off"
+              (input)="buscarProveedor($event)"
+            />
+
+            @if (mostrarProveedores()) {
+
+              <div class="provider-results">
+
+                @for (
+                  proveedor of proveedores();
+                  track proveedor.idProveedor
+                ) {
+
+                  <button
+                    type="button"
+                    class="provider-item"
+                    (click)="seleccionarProveedor(proveedor)">
+
+                    <strong>
+                      {{ proveedor.nombre }}
+                    </strong>
+
+                    <small>
+                      {{ proveedor.telefono }}
+                    </small>
+
+                  </button>
+
+                }
+
+              </div>
+
+            }
+
+          </div>
 
               <div class="field">
                 <label for="precio">Precio <span aria-hidden="true">*</span></label>
@@ -212,7 +274,39 @@ interface Producto {
     .status-pill.inactive { background: #f3f5f3; color: #5d665f; }
     .status { padding: 24px; }
     @media (max-width: 640px) { .section-heading { flex-direction: column; align-items: flex-start; padding: 18px; } .edit-fields { grid-template-columns: 1fr; } }
-  `,
+  .provider-field {
+  position: relative;
+}
+
+.provider-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #dbe4f0;
+  border-radius: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,.12);
+}
+
+.provider-item {
+  width: 100%;
+  border: none;
+  background: white;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.provider-item:hover {
+  background: #eff6ff;
+}`
+  ,
+
+  
 })
 export class ProductosComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
@@ -223,54 +317,114 @@ export class ProductosComponent implements OnInit {
   protected readonly creando = signal(false);
   protected readonly guardando = signal(false);
   protected readonly errorEdicion = signal('');
+  protected readonly proveedores = signal<ProveedorBusqueda[]>([]);
+  protected readonly mostrarProveedores = signal(false);
+  private readonly proveedorSearch$ =
+  new Subject<string>();
+  private readonly proveedorService = inject(ProveedorService);
 
-  protected readonly form = this.formBuilder.nonNullable.group({
-    codigoBarras: ['', [Validators.required, Validators.maxLength(13)]], // NUEVA VALIDACIÓN
-    nombre: ['', [Validators.required, Validators.maxLength(120)]],
-    descripcion: ['', [Validators.maxLength(250)]],
-    categoria: ['', [Validators.required]],
-    precio: [0, [Validators.required, Validators.min(0)]],
-    stock: [0, [Validators.required, Validators.min(0)]],
-    activo: [true],
-  });
+protected readonly form = this.formBuilder.group({
+
+  codigoBarras: [
+    '',
+    [Validators.required, Validators.maxLength(13)]
+  ],
+
+  nombre: [
+    '',
+    [Validators.required, Validators.maxLength(120)]
+  ],
+
+  descripcion: [
+    '',
+    [Validators.maxLength(250)]
+  ],
+
+  categoria: [
+    '',
+    [Validators.required]
+  ],
+
+  precio: [
+    0,
+    [Validators.required, Validators.min(0)]
+  ],
+
+  stock: [
+    0,
+    [Validators.required, Validators.min(0)]
+  ],
+
+idProveedor: [null as number | null, Validators.required],
+
+  proveedorNombre: [
+    ''
+  ],
+
+  activo: [true]
+
+});
+
 
   ngOnInit(): void {
-    this.cargarProductos();
-  }
 
-  cargarProductos(): void {
-    this.productoService.listar().subscribe({
-      next: (data) => {
-        const mappedData: Producto[] = data.map(p => ({
-          id: p.idProducto,
-          codigoBarras: p.codigoBarras,
-          nombre: p.nombre,
-          descripcion: p.descripcion || '',
-          categoria: p.categoria,
-          precio: p.precio,
-          stock: p.stock,
-          activo: p.estado !== 'inactivo',
-          fechaAlta: new Date().toISOString().slice(0, 10)
-        }));
-        this.productos.set(mappedData);
-      },
-      error: (err) => {
-        console.error('Error al cargar productos', err);
-        this.errorEdicion.set('No se pudieron cargar los productos del servidor.');
+  this.cargarProductos();
+
+  this.proveedorSearch$
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    )
+    .subscribe(texto => {
+
+      if (texto.length < 2) {
+
+        this.proveedores.set([]);
+        this.mostrarProveedores.set(false);
+
+        return;
       }
+
+      this.proveedorService
+        .buscarPredictivo(texto)
+        .subscribe({
+
+         next: (proveedores: ProveedorBusqueda[]) => {
+
+            this.proveedores.set(proveedores);
+
+            this.mostrarProveedores.set(
+              proveedores.length > 0
+            );
+          },
+
+          error: (err: unknown) => {
+
+            console.error(err);
+
+            this.proveedores.set([]);
+            this.mostrarProveedores.set(false);
+          }
+
+        });
+
     });
-  }
+
+}
+
 
   iniciarNuevo(): void {
-    this.form.reset({
-      codigoBarras: '',
-      nombre: '',
-      descripcion: '',
-      categoria: '',
-      precio: 0,
-      stock: 0,
-      activo: true,
-    });
+   this.form.reset({
+  codigoBarras: '',
+  nombre: '',
+  descripcion: '',
+  categoria: '',
+  precio: 0,
+  stock: 0,
+  idProveedor: null,
+  proveedorNombre: '',
+  activo: true,
+});
     this.errorEdicion.set('');
     this.editandoId.set(null);
     this.creando.set(true);
@@ -286,6 +440,8 @@ export class ProductosComponent implements OnInit {
       precio: producto.precio,
       stock: producto.stock,
       activo: producto.activo,
+      idProveedor: producto.idProveedor,
+      proveedorNombre: producto.nombreProveedor,
     });
     this.errorEdicion.set('');
     this.editandoId.set(producto.id);
@@ -298,56 +454,185 @@ export class ProductosComponent implements OnInit {
     this.form.reset();
   }
 
-  guardarProducto(): void {
-    const id = this.editandoId();
-    const esNuevo = this.creando();
+buscarProveedor(event: Event): void {
 
-    if (this.form.invalid || this.guardando() || (!esNuevo && id === null)) {
-      this.form.markAllAsTouched();
-      return;
+  const texto =
+    (event.target as HTMLInputElement)
+      .value
+      .trim();
+
+  this.proveedorSearch$.next(texto);
+
+}
+
+seleccionarProveedor(
+  proveedor: ProveedorBusqueda
+): void {
+
+  this.form.patchValue({
+
+    idProveedor: proveedor.idProveedor,
+
+    proveedorNombre: proveedor.nombre
+
+  });
+
+  this.mostrarProveedores.set(false);
+
+}
+
+cargarProductos(): void {
+  this.productoService.listar().subscribe({
+
+    next: (data) => {
+
+      const mappedData: Producto[] = data.map(p => ({
+
+        id: p.idProducto,
+        codigoBarras: p.codigoBarras,
+        nombre: p.nombre,
+        descripcion: p.descripcion || '',
+        categoria: p.categoria,
+        precio: p.precio,
+        stock: p.stock,
+        activo: p.estado !== 'inactivo',
+        fechaAlta: new Date().toISOString().slice(0, 10),
+
+        idProveedor: p.idProveedor,
+        nombreProveedor: p.nombreProveedor ?? ''
+
+      }));
+
+      this.productos.set(mappedData);
+
+    },
+
+    error: err => {
+
+      console.error(err);
+
+      this.errorEdicion.set(
+        'No se pudieron cargar los productos.'
+      );
+
     }
 
-    this.guardando.set(true);
-    this.errorEdicion.set('');
-    const value = this.form.getRawValue();
+  });
 
-    // AHORA ENVIAMOS EL CÓDIGO DE BARRAS REAL
-    const request: ProductoRequest = {
-      codigoBarras: value.codigoBarras.trim(),
-      nombre: value.nombre.trim(),
-      descripcion: value.descripcion.trim(),
-      categoria: value.categoria.trim(),
-      precio: Number(value.precio),
-      stock: Number(value.stock),
-      estado: value.activo ? 'activo' : 'inactivo' 
-    };
+}
+    guardarProducto(): void {
 
-    if (esNuevo) {
-      this.productoService.crear(request).subscribe({
-        next: () => {
-          this.cargarProductos();
-          this.guardando.set(false);
-          this.cancelarEdicion();
-        },
-        error: (err) => {
-          console.error('Error al crear:', err);
-          this.errorEdicion.set('Error al guardar el producto en el servidor. Verifica que el código de barras no esté duplicado.');
-          this.guardando.set(false);
-        }
-      });
-    } else if (id !== null) {
-      this.productoService.actualizar(id, request).subscribe({
-        next: () => {
-          this.cargarProductos();
-          this.guardando.set(false);
-          this.cancelarEdicion();
-        },
-        error: (err) => {
-          console.error('Error al actualizar:', err);
-          this.errorEdicion.set('Error al actualizar el producto.');
-          this.guardando.set(false);
-        }
-      });
-    }
+  const id = this.editandoId();
+  const esNuevo = this.creando();
+
+  if (
+    this.form.invalid ||
+    this.guardando() ||
+    (!esNuevo && id === null)
+  ) {
+
+    this.form.markAllAsTouched();
+    return;
+
   }
+
+  this.guardando.set(true);
+  this.errorEdicion.set('');
+
+  const value = this.form.getRawValue();
+
+  const request: ProductoRequest = {
+
+    codigoBarras:
+      value.codigoBarras?.trim() ?? '',
+
+    nombre:
+      value.nombre?.trim() ?? '',
+
+    descripcion:
+      value.descripcion?.trim() ?? '',
+
+    categoria:
+      value.categoria?.trim() ?? '',
+
+    precio:
+      Number(value.precio),
+
+    stock:
+      Number(value.stock),
+
+    idProveedor:
+      Number(value.idProveedor),
+
+    estado:
+      value.activo
+        ? 'activo'
+        : 'inactivo'
+
+  };
+
+  if (esNuevo) {
+
+    this.productoService
+      .crear(request)
+      .subscribe({
+
+        next: () => {
+
+          this.cargarProductos();
+
+          this.guardando.set(false);
+
+          this.cancelarEdicion();
+
+        },
+
+        error: (err: unknown) => {
+
+          console.error(err);
+
+          this.errorEdicion.set(
+            'Error al guardar el producto.'
+          );
+
+          this.guardando.set(false);
+
+        }
+
+      });
+
+  } else if (id !== null) {
+
+    this.productoService
+      .actualizar(id, request)
+      .subscribe({
+
+        next: () => {
+
+          this.cargarProductos();
+
+          this.guardando.set(false);
+
+          this.cancelarEdicion();
+
+        },
+
+        error: (err: unknown) => {
+
+          console.error(err);
+
+          this.errorEdicion.set(
+            'Error al actualizar el producto.'
+          );
+
+          this.guardando.set(false);
+
+        }
+
+      });
+
+    }
+
+  }
+  
 }

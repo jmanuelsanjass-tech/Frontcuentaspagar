@@ -12,9 +12,11 @@ export interface ProductoResponse {
   precio: number;
   stock: number;
   estado: string | null;
+
+  idProveedor: number | null;
+  nombreProveedor?: string;
 }
 
-// Interfaz para enviar datos al backend
 export interface ProductoRequest {
   codigoBarras: string;
   nombre: string;
@@ -23,25 +25,47 @@ export interface ProductoRequest {
   precio: number;
   stock: number;
   estado: string;
+
+  idProveedor: number;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductoService {
+
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = `${environment.apiUrl}/api/productos`;
+
+  private readonly apiUrl =
+    `${environment.apiUrl}/api/productos`;
 
   listar(): Observable<ProductoResponse[]> {
-    return this.http.get<ProductoResponse[]>(this.apiUrl, { withCredentials: true });
+    return this.http.get<ProductoResponse[]>(
+      this.apiUrl,
+      { withCredentials: true }
+    );
   }
 
-  // NUEVO MÉTODO PARA CREAR
-  crear(producto: ProductoRequest): Observable<ProductoResponse> {
-    return this.http.post<ProductoResponse>(this.apiUrl, producto, { withCredentials: true });
+  crear(
+    producto: ProductoRequest
+  ): Observable<ProductoResponse> {
+
+    return this.http.post<ProductoResponse>(
+      this.apiUrl,
+      producto,
+      { withCredentials: true }
+    );
   }
 
-  // NUEVO MÉTODO PARA ACTUALIZAR
- actualizar(id: number, producto: ProductoRequest): Observable<ProductoResponse> {
-    // Agregamos "/id/" antes del ID
-    return this.http.put<ProductoResponse>(`${this.apiUrl}/id/${id}`, producto, { withCredentials: true });
+  actualizar(
+    id: number,
+    producto: ProductoRequest
+  ): Observable<ProductoResponse> {
+
+    return this.http.put<ProductoResponse>(
+      `${this.apiUrl}/id/${id}`,
+      producto,
+      { withCredentials: true }
+    );
   }
 }
